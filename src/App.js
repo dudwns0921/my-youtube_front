@@ -1,20 +1,35 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Join from './pages/Join';
-import Login from './pages/Login';
-import Video from './pages/Video';
+import { Link, Outlet } from 'react-router-dom';
+import styled from 'styled-components';
+
+const Nav = styled.nav`
+  display: flex;
+  height: 10vh;
+`;
+
+const StyledLink = styled(Link)`
+  margin-right: 1rem;
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  height: 90vh;
+`;
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="video" element={<Video />} />
-        <Route path="login" element={<Login />} />
-        <Route path="join" element={<Join />} />
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <Nav>
+        <StyledLink to="/">Home</StyledLink>
+        <StyledLink to="/login">Login</StyledLink>
+        <StyledLink to="/join">Join</StyledLink>
+      </Nav>
+      <Content>
+        <Outlet />
+      </Content>
+    </div>
   );
 }
 

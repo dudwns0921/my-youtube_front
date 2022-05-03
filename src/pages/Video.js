@@ -1,7 +1,16 @@
 import React from 'react';
+import { useParams, Link } from 'react-router-dom';
+import videos from '../dummy/DummyVideos';
 
 function Video() {
-  return <h1>Video</h1>;
+  let { id } = useParams();
+  const videoObj = videos[id - 1];
+  return (
+    <div>
+      <h1>{videoObj.title}</h1>
+      <Link to={`/videoEdit/${id}`}>Edit Video→</Link>
+    </div>
+  );
 }
 
 export default Video;
