@@ -1,7 +1,8 @@
-import React from 'react';
+import { useState, React } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 function VideoEdit() {
+  const [newTitle, setNewTitle] = useState(' ');
   let { id } = useParams();
   let navigate = useNavigate();
 
