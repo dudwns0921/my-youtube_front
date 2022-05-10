@@ -1,20 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import videos from '../dummy/DummyVideos';
+import { getVideos } from '../axios/axios';
 
 function Home() {
-  return (
-    <div>
-      {videos.map((item) => {
-        return (
-          <div key={item.id}>
-            <h1>{item.title}</h1>
-            <Link to={`video/${item.id}`}>Watch Video→</Link>
-          </div>
-        );
-      })}
-    </div>
-  );
+  async function fetchData() {
+    const response = await getVideos();
+    console.log(response);
+  }
+
+  useEffect(() => {
+    fetchData();
+  });
+
+  return <div></div>;
 }
 
 export default Home;
