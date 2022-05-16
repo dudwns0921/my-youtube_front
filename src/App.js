@@ -25,6 +25,7 @@ function App() {
         <StyledLink to="/">Home</StyledLink>
         <StyledLink to="/login">Login</StyledLink>
         <StyledLink to="/join">Join</StyledLink>
+        <StyledLink to="/upload">Upload</StyledLink>
       </Nav>
       <Content>
         <Outlet />

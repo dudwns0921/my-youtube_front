@@ -17,4 +17,8 @@ function loginUser(userData) {
   return instance.post('/login', userData);
 }
 
-export { getVideos, loginUser };
+function uploadVideo(videoObj) {
+  return instance.post('/upload', videoObj);
+}
+
+export { getVideos, loginUser, uploadVideo };

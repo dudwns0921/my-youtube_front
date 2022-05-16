@@ -9,6 +9,7 @@ import App from './App';
 import Home from './pages/Home';
 import Join from './pages/Join';
 import Login from './pages/Login';
+import Upload from './pages/Upload';
 import Video from './pages/Video';
 import VideoEdit from './pages/VideoEdit';
 
@@ -27,6 +28,7 @@ root.render(
           <Route index element={<Home />} />
           <Route path="join" element={<Join />} />
           <Route path="login" element={<Login />} />
+          <Route path="upload" element={<Upload />} />
           <Route path="video/:id" element={<Video />} />
           <Route path="videoEdit/:id" element={<VideoEdit />} />
         </Route>
