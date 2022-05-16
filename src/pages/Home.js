@@ -21,7 +21,7 @@ function Home() {
         : videos.map((video) => {
             return (
               <div key={video.createdAt}>
-                <h1>{video.title}</h1>
+                <Link to={`video/${video._id}`}>{video.title}</Link>
                 <h2>{video.hashtags}</h2>
                 <h2>{video.createdAt}</h2>
                 <h2>{video.meta.views}</h2>

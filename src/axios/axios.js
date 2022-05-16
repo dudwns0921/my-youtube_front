@@ -12,7 +12,9 @@ const instance = axios.create({
 function getVideos() {
   return instance.get('/');
 }
-
+function getVideoWithId(id) {
+  return instance.post('/video/:id', { id });
+}
 function loginUser(userData) {
   return instance.post('/login', userData);
 }
@@ -21,4 +23,4 @@ function uploadVideo(videoObj) {
   return instance.post('/upload', videoObj);
 }
 
-export { getVideos, loginUser, uploadVideo };
+export { getVideos, getVideoWithId, loginUser, uploadVideo };

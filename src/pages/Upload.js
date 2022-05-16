@@ -21,9 +21,11 @@ function Upload() {
   };
   async function handleUploadVideo(e) {
     e.preventDefault();
-    const response = await uploadVideo(videoObj);
-    console.log(response);
-    // navigate(0);
+    const { data } = await uploadVideo(videoObj);
+    alert(data.result);
+    if (data.result == 'success') {
+      navigate(0);
+    }
   }
   return (
     <div>
