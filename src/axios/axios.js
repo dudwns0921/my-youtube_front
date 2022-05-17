@@ -22,5 +22,8 @@ function loginUser(userData) {
 function uploadVideo(videoObj) {
   return instance.post('/upload', videoObj);
 }
+const editVideo = (payload) => {
+  return instance.post('/videoEdit/:id', payload);
+};
 
-export { getVideos, getVideoWithId, loginUser, uploadVideo };
+export { getVideos, getVideoWithId, loginUser, uploadVideo, editVideo };
