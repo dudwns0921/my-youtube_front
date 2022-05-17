@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Upload from './pages/Upload';
 import Video from './pages/Video';
 import VideoEdit from './pages/VideoEdit';
+import NotFound from './pages/NotFound';
 
 const GlobalStyles = createGlobalStyle`
   box-sizing: border-box;
@@ -31,6 +32,7 @@ root.render(
           <Route path="upload" element={<Upload />} />
           <Route path="video/:id" element={<Video />} />
           <Route path="videoEdit/:id" element={<VideoEdit />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

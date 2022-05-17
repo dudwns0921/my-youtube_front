@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getVideoWithId } from '../axios/axios';
 
 function Video() {
   let { id } = useParams();
+  const navigate = useNavigate();
   const [video, setVideo] = useState({});
   const [loading, setLoading] = useState(true);
   async function getVideo(id) {
     const { data } = await getVideoWithId(id);
-    setVideo(data);
+    if (data.title) {
+      setVideo(data);
+    } else {
+      navigate('/404');
+    }
   }
   useEffect(() => {
     getVideo(id);
   }, []);
   return (
     <div>
+      <h1>{video.title}</h1>
       <Link to={`/videoEdit/${id}`}>Edit Video→</Link>
     </div>
   );
