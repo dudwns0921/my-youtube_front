@@ -27,6 +27,9 @@ const editVideo = (payload) => {
 const deleteVideo = (id) => {
   return instance.post('/videoDelete', { id });
 };
+const searchVideo = (keyword) => {
+  return instance.post('/videosearch', { keyword });
+};
 
 export {
   getVideos,
@@ -35,4 +38,5 @@ export {
   uploadVideo,
   editVideo,
   deleteVideo,
+  searchVideo,
 };
