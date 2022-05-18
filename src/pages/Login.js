@@ -1,49 +1,49 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { loginUser } from '../axios/axios';
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import { loginUser } from '../axios/axios'
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 30%;
-`;
+`
 
 function Login() {
-  const [id, setId] = useState('');
-  const [pwd, setPwd] = useState('');
+  const [email, setId] = useState('')
+  const [password, setPassword] = useState('')
 
   let userData = {
-    id,
-    pwd,
-  };
+    email,
+    password,
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const response = await loginUser(JSON.stringify(userData));
-    console.log(response);
-  };
+    e.preventDefault()
+    const response = await loginUser(JSON.stringify(userData))
+    console.log(response)
+  }
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <label htmlFor="id">아이디</label>
+      <label htmlFor="email">아이디</label>
       <input
-        id="id"
+        id="email"
         type="text"
         onChange={(e) => {
-          setId(e.target.value);
+          setId(e.target.value)
         }}
       />
-      <label htmlFor="pwd">비밀번호</label>
+      <label htmlFor="password">비밀번호</label>
       <input
-        id="pwd"
+        id="password"
         type="text"
         onChange={(e) => {
-          setPwd(e.target.value);
+          setPassword(e.target.value)
         }}
       />
       <button type="submit">로그인</button>
     </StyledForm>
-  );
+  )
 }
 
-export default Login;
+export default Login
