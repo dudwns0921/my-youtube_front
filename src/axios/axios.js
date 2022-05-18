@@ -10,16 +10,13 @@ const instance = axios.create({
 });
 
 function getVideos() {
-  return instance.get('/getVideos');
+  return instance.get('/videoFindAll');
 }
 function getVideoWithId(id) {
-  return instance.post('/getVideo', { id });
-}
-function loginUser(userData) {
-  return instance.post('/login', userData);
+  return instance.post('/videoFind', { id });
 }
 function uploadVideo(videoObj) {
-  return instance.post('/upload', videoObj);
+  return instance.post('/videoUpload', videoObj);
 }
 const editVideo = (payload) => {
   return instance.post('/videoEdit', payload);
@@ -31,12 +28,20 @@ const searchVideo = (keyword) => {
   return instance.post('/videosearch', { keyword });
 };
 
+function loginUser(userData) {
+  return instance.post('/login', userData);
+}
+function joinUser(userData) {
+  return instance.post('/join', userData);
+}
+
 export {
   getVideos,
   getVideoWithId,
-  loginUser,
   uploadVideo,
   editVideo,
   deleteVideo,
   searchVideo,
+  loginUser,
+  joinUser,
 };
