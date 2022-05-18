@@ -19,14 +19,16 @@ function Upload() {
     description: desc,
     hashtags: hashtags,
   };
-  async function handleUploadVideo(e) {
+  const handleUploadVideo = async (e) => {
     e.preventDefault();
     const { data } = await uploadVideo(videoObj);
-    alert(data.result);
-    if (data.result == 'success') {
-      navigate(0);
+    if (data.result === 'success') {
+      alert(data.result);
+      navigate('/');
+    } else {
+      alert(data.message);
     }
-  }
+  };
   return (
     <div>
       <StyledForm onSubmit={handleUploadVideo}>
@@ -34,6 +36,7 @@ function Upload() {
         <input
           id="title"
           type="text"
+          required
           onChange={(e) => {
             setTitle(e.target.value);
           }}
@@ -42,6 +45,7 @@ function Upload() {
         <input
           id="desc"
           type="text"
+          required
           onChange={(e) => {
             setDesc(e.target.value);
           }}
@@ -50,6 +54,7 @@ function Upload() {
         <input
           id="hashtags"
           type="text"
+          required
           placeholder="Hashtags, separated by comma"
           onChange={(e) => {
             setHashtags(e.target.value);

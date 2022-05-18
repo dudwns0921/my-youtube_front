@@ -10,20 +10,29 @@ const instance = axios.create({
 });
 
 function getVideos() {
-  return instance.get('/');
+  return instance.get('/getVideos');
 }
 function getVideoWithId(id) {
-  return instance.post('/video/:id', { id });
+  return instance.post('/getVideo', { id });
 }
 function loginUser(userData) {
   return instance.post('/login', userData);
 }
-
 function uploadVideo(videoObj) {
   return instance.post('/upload', videoObj);
 }
 const editVideo = (payload) => {
-  return instance.post('/videoEdit/:id', payload);
+  return instance.post('/videoEdit', payload);
+};
+const deleteVideo = (id) => {
+  return instance.post('/videoDelete', { id });
 };
 
-export { getVideos, getVideoWithId, loginUser, uploadVideo, editVideo };
+export {
+  getVideos,
+  getVideoWithId,
+  loginUser,
+  uploadVideo,
+  editVideo,
+  deleteVideo,
+};

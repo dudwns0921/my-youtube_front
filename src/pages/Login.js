@@ -17,11 +17,11 @@ function Login() {
     pwd,
   };
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await loginUser(JSON.stringify(userData));
     console.log(response);
-  }
+  };
 
   return (
     <StyledForm onSubmit={handleSubmit}>

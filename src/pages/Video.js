@@ -7,14 +7,14 @@ function Video() {
   const navigate = useNavigate();
   const [video, setVideo] = useState({});
   const [loading, setLoading] = useState(true);
-  async function getVideo(id) {
+  const getVideo = async (id) => {
     const { data } = await getVideoWithId(id);
     if (data.title) {
       setVideo(data);
     } else {
       navigate('/404');
     }
-  }
+  };
   useEffect(() => {
     getVideo(id);
   }, []);

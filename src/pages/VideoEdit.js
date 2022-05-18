@@ -1,6 +1,6 @@
 import { useState, React, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { editVideo, getVideoWithId } from '../axios/axios';
+import { deleteVideo, editVideo, getVideoWithId } from '../axios/axios';
 import styled from 'styled-components';
 
 const StyledForm = styled.form`
@@ -33,7 +33,11 @@ function VideoEdit() {
     setVideo(data);
     setNewTitle(data.title);
     setNewDesc(data.description);
-    setNewHashtags(data.hashtags);
+    setNewHashtags(
+      data.hashtags.map((item) => {
+        return item.substr(1);
+      })
+    );
     setLoading(false);
   };
   const handleEditVideo = async (e) => {
@@ -44,6 +48,17 @@ function VideoEdit() {
       navigate(`/video/${id}`);
     } else {
       alert(data.message);
+    }
+  };
+  const handleDeleteVideo = async () => {
+    if (window.confirm('정말 삭제하시겠습니까?')) {
+      const { data } = await deleteVideo(id);
+      if (data.result === 'success') {
+        alert(data.result);
+        navigate('/');
+      } else {
+        alert(data.message);
+      }
     }
   };
 
@@ -73,7 +88,7 @@ function VideoEdit() {
                 setNewDesc(e.target.value);
               }}
             />
-            <label htmlFor="newHashtags">비밀번호</label>
+            <label htmlFor="newHashtags">해시태그</label>
             <input
               id="newHashtags"
               type="text"
@@ -84,6 +99,9 @@ function VideoEdit() {
             />
             <button type="submit">수정</button>
           </StyledForm>
+          <button type="button" onClick={handleDeleteVideo}>
+            비디오 삭제
+          </button>
         </>
       )}
     </div>
