@@ -1,21 +1,21 @@
-import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import styled from 'styled-components';
-import SearchBar from './components/SearchBar';
+import React from 'react'
+import { Link, Outlet } from 'react-router-dom'
+import styled from 'styled-components'
+import SearchBar from './components/SearchBar'
 
 const Nav = styled.nav`
   display: flex;
-`;
+`
 
 const StyledLink = styled(Link)`
   margin-right: 1rem;
-`;
+`
 
 const Content = styled.div`
   display: flex;
   flex-direction: column;
   border: 1px solid black;
-`;
+`
 
 function App() {
   return (
@@ -31,7 +31,7 @@ function App() {
         <Outlet />
       </Content>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

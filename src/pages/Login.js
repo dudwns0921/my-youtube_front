@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { loginUser } from '../axios/axios'
+import { saveTokenToCookie, saveUserToCookie } from '../utils/cookie'
 
 const StyledForm = styled.form`
   display: flex;
@@ -19,8 +20,9 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const response = await loginUser(JSON.stringify(userData))
-    console.log(response)
+    const { data } = await loginUser(JSON.stringify(userData))
+    saveTokenToCookie(JSON.stringify(data.token))
+    saveUserToCookie(JSON.stringify(data.user))
   }
 
   return (

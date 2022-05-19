@@ -1,66 +1,66 @@
-import { useState, React, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { deleteVideo, editVideo, getVideoWithId } from '../axios/axios';
-import styled from 'styled-components';
+import { useState, React, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { deleteVideo, editVideo, getVideoWithId } from '../axios/axios'
+import styled from 'styled-components'
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 30%;
-`;
+`
 
 function VideoEdit() {
-  const [video, setVideo] = useState({});
-  const [newTitle, setNewTitle] = useState('');
-  const [newDesc, setNewDesc] = useState('');
-  const [newHashtags, setNewHashtags] = useState('');
-  const [loading, setLoading] = useState(true);
-  let { id } = useParams();
-  let navigate = useNavigate();
+  const [video, setVideo] = useState({})
+  const [newTitle, setNewTitle] = useState('')
+  const [newDesc, setNewDesc] = useState('')
+  const [newHashtags, setNewHashtags] = useState('')
+  const [loading, setLoading] = useState(true)
+  let { id } = useParams()
+  let navigate = useNavigate()
   let payload = {
     id,
     title: newTitle,
     description: newDesc,
     hashtags: newHashtags,
-  };
+  }
 
   useEffect(() => {
-    getVideo();
-  }, []);
+    getVideo()
+  }, [])
 
   const getVideo = async () => {
-    const { data } = await getVideoWithId(id);
-    setVideo(data);
-    setNewTitle(data.title);
-    setNewDesc(data.description);
+    const { data } = await getVideoWithId(id)
+    setVideo(data)
+    setNewTitle(data.title)
+    setNewDesc(data.description)
     setNewHashtags(
       data.hashtags.map((item) => {
-        return item.substr(1);
+        return item.substr(1)
       })
-    );
-    setLoading(false);
-  };
+    )
+    setLoading(false)
+  }
   const handleEditVideo = async (e) => {
-    e.preventDefault();
-    const { data } = await editVideo(payload);
+    e.preventDefault()
+    const { data } = await editVideo(payload)
     if (data.result === 'success') {
-      alert(data.result);
-      navigate(`/video/${id}`);
+      alert(data.result)
+      navigate(`/video/${id}`)
     } else {
-      alert(data.message);
+      alert(data.message)
     }
-  };
+  }
   const handleDeleteVideo = async () => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
-      const { data } = await deleteVideo(id);
+      const { data } = await deleteVideo(id)
       if (data.result === 'success') {
-        alert(data.result);
-        navigate('/');
+        alert(data.result)
+        navigate('/')
       } else {
-        alert(data.message);
+        alert(data.message)
       }
     }
-  };
+  }
 
   return (
     <div>
@@ -76,7 +76,7 @@ function VideoEdit() {
               type="text"
               value={newTitle}
               onChange={(e) => {
-                setNewTitle(e.target.value);
+                setNewTitle(e.target.value)
               }}
             />
             <label htmlFor="newDesc">내용</label>
@@ -85,7 +85,7 @@ function VideoEdit() {
               type="text"
               value={newDesc}
               onChange={(e) => {
-                setNewDesc(e.target.value);
+                setNewDesc(e.target.value)
               }}
             />
             <label htmlFor="newHashtags">해시태그</label>
@@ -94,7 +94,7 @@ function VideoEdit() {
               type="text"
               value={newHashtags}
               onChange={(e) => {
-                setNewHashtags(e.target.value);
+                setNewHashtags(e.target.value)
               }}
             />
             <button type="submit">수정</button>
@@ -105,7 +105,7 @@ function VideoEdit() {
         </>
       )}
     </div>
-  );
+  )
 }
 
-export default VideoEdit;
+export default VideoEdit
