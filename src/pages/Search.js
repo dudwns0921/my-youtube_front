@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { searchVideo } from '../axios/axios';
-import { formatDate } from '../utils/utils';
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { searchVideo } from '../axios/axios'
+import { formatDate } from '../utils/utils'
 
 function Search() {
-  const { keyword } = useParams();
-  const [videos, setVideos] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { keyword } = useParams()
+  const [videos, setVideos] = useState([])
+  const [loading, setLoading] = useState(true)
   const getVideosWithKeyword = async () => {
-    const { data } = await searchVideo(keyword);
-    setVideos(data.videos);
-    setLoading(false);
-  };
+    const { data } = await searchVideo(keyword)
+    setVideos(data.videos)
+    setLoading(false)
+  }
   useEffect(() => {
-    getVideosWithKeyword();
+    getVideosWithKeyword()
   }, []),
-    [];
+    []
 
   return (
     <div>
@@ -33,12 +33,12 @@ function Search() {
                 <h2>{video.meta.views}</h2>
                 <p>{video.description}</p>
               </div>
-            );
+            )
           })}
         </>
       )}
     </div>
-  );
+  )
 }
 
-export default Search;
+export default Search

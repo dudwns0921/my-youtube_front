@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function SearchBar() {
-  const navigate = useNavigate();
-  const [keyword, setKeyword] = useState('');
+  const navigate = useNavigate()
+  const [keyword, setKeyword] = useState('')
   const handleNavigateSearch = async () => {
-    navigate(`search/${keyword}`);
-    setKeyword('');
-  };
+    navigate(`search/${keyword}`)
+    setKeyword('')
+  }
   return (
     <div>
       <input
         type="text"
         onChange={(e) => {
-          setKeyword(e.target.value);
+          setKeyword(e.target.value)
         }}
         value={keyword}
       />
@@ -21,7 +21,7 @@ function SearchBar() {
         검색하기
       </button>
     </div>
-  );
+  )
 }
 
-export default SearchBar;
+export default SearchBar

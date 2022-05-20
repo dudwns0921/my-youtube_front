@@ -40,6 +40,9 @@ function loginUser(userData) {
 function joinUser(userData) {
   return instance.post('/join', userData)
 }
+const githubLogin = (githubCode) => {
+  return instance.post('/githubLogin', { githubCode })
+}
 
 // 토큰 인증 필요한 api
 
@@ -62,4 +65,5 @@ export {
   searchVideo,
   loginUser,
   joinUser,
+  githubLogin,
 }

@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { getVideos } from '../axios/axios';
-import { formatDate } from '../utils/utils';
-import _ from 'lodash';
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { getVideos } from '../axios/axios'
+import { formatDate } from '../utils/utils'
+import _ from 'lodash'
 
 function Home() {
   useEffect(() => {
-    getAllVideos();
-  }, []);
-  const [videos, setVideos] = useState([]);
-  const [loading, setLoading] = useState(true);
+    getAllVideos()
+  }, [])
+  const [videos, setVideos] = useState([])
+  const [loading, setLoading] = useState(true)
   const getAllVideos = async () => {
-    const { data } = await getVideos();
-    _.sortBy(data, ['createdAt']);
-    setVideos(data);
-    setLoading(false);
-  };
+    const { data } = await getVideos()
+    _.sortBy(data, ['createdAt'])
+    setVideos(data)
+    setLoading(false)
+  }
 
   return (
     <div>
@@ -31,11 +31,11 @@ function Home() {
                 <h2>{video.meta.views}</h2>
                 <p>{video.description}</p>
               </div>
-            );
+            )
           })
         : 'No Videos'}
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home
