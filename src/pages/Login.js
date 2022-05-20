@@ -21,7 +21,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const { data } = await loginUser(JSON.stringify(userData))
-    saveTokenToCookie(JSON.stringify(data.token))
+    saveTokenToCookie(data.token)
     saveUserToCookie(JSON.stringify(data.user))
   }
 

@@ -5,7 +5,7 @@ function setInterceptor(axiosService) {
     function (config) {
       // 요청을 보내기 전에 어떤 처리를 할 수 있다.
       config.headers.Authorization = getTokenFromCookie()
-        ? getTokenFromCookie()
+        ? `Bearer ${getTokenFromCookie()}`
         : ''
       return config
     },
