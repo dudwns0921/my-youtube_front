@@ -14,8 +14,9 @@ function getTokenFromCookie() {
 }
 
 function getUserFromCookie() {
-  return JSON.parse(
-    document.cookie.replace(/(?:(?:^|.*;\s*)user\s*=\s*([^;]*).*$)|^.*$/, '$1')
+  return document.cookie.replace(
+    /(?:(?:^|.*;\s*)user\s*=\s*([^;]*).*$)|^.*$/,
+    '$1'
   )
 }
 

@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import { type } from '@testing-library/user-event/dist/type'
+import React, { useState } from 'react'
+import { useNavigate, useOutletContext } from 'react-router-dom'
 import styled from 'styled-components'
-import { githubLogin, loginUser } from '../axios/axios'
-import { saveTokenToCookie, saveUserToCookie } from '../utils/cookie'
-import { useNavigate, useLocation } from 'react-router-dom'
-import qs from 'qs'
+import { loginUser } from '../axios/axios'
+import {
+  getTokenFromCookie,
+  getUserFromCookie,
+  saveTokenToCookie,
+  saveUserToCookie,
+} from '../utils/cookie'
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 30%;
-
   button {
     a {
       text-decoration: none;
@@ -17,25 +21,17 @@ const StyledForm = styled.form`
     }
   }
 `
-
 function Login() {
+  const [setIsLogin] = useOutletContext()
+  // Redux 대신 props로 state와 setState를 전달
   const [email, setId] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
-  const location = useLocation()
-
   let userData = {
     email,
     password,
   }
 
-  const checkGithubLogin = async () => {
-    const queryObj = qs.parse(location.search.substring(1))
-    if (queryObj.code) {
-      const { data } = await githubLogin(queryObj.code)
-      console.log(data)
-    }
-  }
   const handleGithubLogin = () => {
     const baseUrl = 'https://github.com/login/oauth/authorize'
     const config = {
@@ -49,16 +45,15 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const { data } = await loginUser(JSON.stringify(userData))
-    console.log(data)
     saveTokenToCookie(data.token)
     saveUserToCookie(JSON.stringify(data.user))
+    if (getTokenFromCookie() && getUserFromCookie()) {
+      setIsLogin(true)
+      navigate('/')
+    }
   }
-
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <button type="button" onClick={checkGithubLogin}>
-        깃허브 체크 시도
-      </button>
       <label htmlFor="email">아이디</label>
       <input
         id="email"

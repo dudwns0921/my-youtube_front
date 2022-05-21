@@ -21,7 +21,7 @@ function Upload() {
   }
   const handleUploadVideo = async (e) => {
     e.preventDefault()
-    const { data } = await uploadVideo(videoObj)
+    const { data } = await uploadVideo(JSON.stringify(videoObj))
     if (data.result === 'success') {
       alert(data.result)
       navigate('/')

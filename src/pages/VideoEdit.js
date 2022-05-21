@@ -29,7 +29,7 @@ function VideoEdit() {
   }, [])
 
   const getVideo = async () => {
-    const { data } = await getVideoWithId(id)
+    const { data } = await getVideoWithId(JSON.stringify({ id }))
     setVideo(data)
     setNewTitle(data.title)
     setNewDesc(data.description)
@@ -42,7 +42,7 @@ function VideoEdit() {
   }
   const handleEditVideo = async (e) => {
     e.preventDefault()
-    const { data } = await editVideo(payload)
+    const { data } = await editVideo(JSON.stringify(payload))
     if (data.result === 'success') {
       alert(data.result)
       navigate(`/video/${id}`)
@@ -52,7 +52,7 @@ function VideoEdit() {
   }
   const handleDeleteVideo = async () => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
-      const { data } = await deleteVideo(id)
+      const { data } = await deleteVideo(JSON.stringify({ id }))
       if (data.result === 'success') {
         alert(data.result)
         navigate('/')

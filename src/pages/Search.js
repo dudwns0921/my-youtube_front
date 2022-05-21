@@ -8,7 +8,7 @@ function Search() {
   const [videos, setVideos] = useState([])
   const [loading, setLoading] = useState(true)
   const getVideosWithKeyword = async () => {
-    const { data } = await searchVideo(keyword)
+    const { data } = await searchVideo(JSON.stringify({ keyword }))
     setVideos(data.videos)
     setLoading(false)
   }

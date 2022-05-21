@@ -17,6 +17,9 @@ const instance = axios.create({
 const createInstanceWithAuth = () => {
   const instance = axios.create({
     baseURL: API_HOST,
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
   })
   return setInterceptor(instance)
 }
@@ -29,10 +32,10 @@ function getVideos() {
   return instance.get('/videoFindAll')
 }
 function getVideoWithId(id) {
-  return instance.post('/videoFind', { id })
+  return instance.post('/videoFind', id)
 }
 const searchVideo = (keyword) => {
-  return instance.post('/videosearch', { keyword })
+  return instance.post('/videosearch', keyword)
 }
 function loginUser(userData) {
   return instance.post('/login', userData)
@@ -41,7 +44,7 @@ function joinUser(userData) {
   return instance.post('/join', userData)
 }
 const githubLogin = (githubCode) => {
-  return instance.post('/githubLogin', { githubCode })
+  return instance.post('/githubLogin', githubCode)
 }
 
 // 토큰 인증 필요한 api
@@ -53,7 +56,7 @@ const editVideo = (payload) => {
   return instanceWithAuth.post('/videoEdit', payload)
 }
 const deleteVideo = (id) => {
-  return instanceWithAuth.post('/videoDelete', { id })
+  return instanceWithAuth.post('/videoDelete', id)
 }
 
 export {

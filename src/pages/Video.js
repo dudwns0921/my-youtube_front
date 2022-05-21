@@ -8,7 +8,7 @@ function Video() {
   const [video, setVideo] = useState({})
   const [loading, setLoading] = useState(true)
   const getVideo = async (id) => {
-    const { data } = await getVideoWithId(id)
+    const { data } = await getVideoWithId(JSON.stringify({ id }))
     if (data.title) {
       setVideo(data)
     } else {

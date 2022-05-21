@@ -14,6 +14,8 @@ import Video from './pages/Video'
 import VideoEdit from './pages/VideoEdit'
 import NotFound from './pages/NotFound'
 import Search from './pages/Search'
+import GIthubLoginProcess from './pages/GIthubLoginProcess'
+import MyPage from './pages/MyPage'
 
 const GlobalStyles = createGlobalStyle`
   box-sizing: border-box;
@@ -34,6 +36,8 @@ root.render(
           <Route path="video/:id" element={<Video />} />
           <Route path="videoEdit/:id" element={<VideoEdit />} />
           <Route path="search/:keyword" element={<Search />} />
+          <Route path="mypage" element={<MyPage />} />
+          <Route path="githubLoginProcess" element={<GIthubLoginProcess />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
