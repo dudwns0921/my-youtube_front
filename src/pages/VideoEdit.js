@@ -29,7 +29,7 @@ function VideoEdit() {
   }, [])
 
   const getVideo = async () => {
-    const { data } = await getVideoWithId(JSON.stringify({ id }))
+    const { data } = await getVideoWithId({ id })
     setVideo(data)
     setNewTitle(data.title)
     setNewDesc(data.description)

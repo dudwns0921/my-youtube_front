@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
 import NavBar from './components/NavBar'
+import { getUserFromCookie } from './utils/cookie'
 
 const Content = styled.div`
   display: flex;
@@ -11,6 +12,13 @@ const Content = styled.div`
 
 function App() {
   const [isLogin, setIsLogin] = useState(false)
+  useEffect(() => {
+    if (getUserFromCookie()) {
+      setIsLogin(true)
+    } else {
+      setIsLogin(false)
+    }
+  }, [])
   return (
     <div>
       <NavBar isLogin={isLogin} setIsLogin={setIsLogin} />

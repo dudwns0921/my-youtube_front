@@ -13,9 +13,9 @@ function GIthubLoginProcess() {
   const checkGithubLogin = async () => {
     const githubCode = new URLSearchParams(location.search).get('code')
     if (githubCode) {
-      const { data } = await githubLogin(JSON.stringify({ githubCode }))
+      const { data } = await githubLogin({ githubCode })
       saveTokenToCookie(data.token)
-      saveUserToCookie(JSON.parse(data.user))
+      saveUserToCookie(JSON.stringify(data.user))
       setIsLogin(true)
       navigate('/')
     }

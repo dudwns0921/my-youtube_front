@@ -1,4 +1,3 @@
-import { type } from '@testing-library/user-event/dist/type'
 import React, { useState } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import styled from 'styled-components'
@@ -44,7 +43,7 @@ function Login() {
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const { data } = await loginUser(JSON.stringify(userData))
+    const { data } = await loginUser(userData)
     saveTokenToCookie(data.token)
     saveUserToCookie(JSON.stringify(data.user))
     if (getTokenFromCookie() && getUserFromCookie()) {

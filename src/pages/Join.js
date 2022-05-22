@@ -33,7 +33,7 @@ function Join() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const { data } = await joinUser(JSON.stringify(userData))
+    const { data } = await joinUser(userData)
     if (data.result === 'success') {
       alert('회원가입에 성공했습니다.')
       navigate('/login')

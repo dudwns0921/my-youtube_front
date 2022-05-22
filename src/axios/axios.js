@@ -58,6 +58,15 @@ const editVideo = (payload) => {
 const deleteVideo = (id) => {
   return instanceWithAuth.post('/videoDelete', id)
 }
+const checkPassword = (password) => {
+  return instanceWithAuth.post('/checkPassword', password)
+}
+const checkUserData = (userData) => {
+  return instanceWithAuth.post('/checkUserData', userData)
+}
+const editUser = (newUserData) => {
+  return instanceWithAuth.post('/editUser', newUserData)
+}
 
 export {
   getVideos,
@@ -69,4 +78,7 @@ export {
   loginUser,
   joinUser,
   githubLogin,
+  checkPassword,
+  checkUserData,
+  editUser,
 }

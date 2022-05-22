@@ -8,9 +8,10 @@ function Video() {
   const [video, setVideo] = useState({})
   const [loading, setLoading] = useState(true)
   const getVideo = async (id) => {
-    const { data } = await getVideoWithId(JSON.stringify({ id }))
+    const { data } = await getVideoWithId({ id })
     if (data.title) {
       setVideo(data)
+      setLoading(false)
     } else {
       navigate('/404')
     }
@@ -20,8 +21,14 @@ function Video() {
   }, [])
   return (
     <div>
-      <h1>{video.title}</h1>
-      <Link to={`/videoEdit/${id}`}>Edit Video→</Link>
+      {loading ? (
+        'Loading...'
+      ) : (
+        <>
+          <h1>{video.title}</h1>
+          <Link to={`/videoEdit/${id}`}>Edit Video→</Link>
+        </>
+      )}
     </div>
   )
 }
