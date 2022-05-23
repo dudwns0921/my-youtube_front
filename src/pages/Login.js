@@ -44,11 +44,13 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const { data } = await loginUser(userData)
-    saveTokenToCookie(data.token)
-    saveUserToCookie(JSON.stringify(data.user))
-    if (getTokenFromCookie() && getUserFromCookie()) {
-      setIsLogin(true)
-      navigate('/')
+    if (data.result === 'success') {
+      saveTokenToCookie(data.token)
+      saveUserToCookie(JSON.stringify(data.user))
+      if (getTokenFromCookie() && getUserFromCookie()) {
+        setIsLogin(true)
+        navigate('/')
+      }
     }
   }
   return (

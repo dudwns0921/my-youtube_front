@@ -17,6 +17,8 @@ import Search from './pages/Search'
 import GIthubLoginProcess from './pages/GIthubLoginProcess'
 import MyPage from './pages/MyPage'
 import UserEdit from './pages/UserEdit'
+import UserInfoEdit from './pages/UserInfoEdit'
+import UserPwdEdit from './pages/UserPwdEdit'
 
 const GlobalStyles = createGlobalStyle`
   box-sizing: border-box;
@@ -38,7 +40,10 @@ root.render(
           <Route path="videoEdit/:id" element={<VideoEdit />} />
           <Route path="search/:keyword" element={<Search />} />
           <Route path="mypage" element={<MyPage />} />
-          <Route path="userEdit" element={<UserEdit />} />
+          <Route path="userEdit" element={<UserEdit />}>
+            <Route index element={<UserInfoEdit />} />
+            <Route path="pwd" element={<UserPwdEdit />} />
+          </Route>
           <Route path="githubLoginProcess" element={<GIthubLoginProcess />} />
           <Route path="*" element={<NotFound />} />
         </Route>

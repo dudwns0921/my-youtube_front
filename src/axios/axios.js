@@ -67,6 +67,9 @@ const checkUserData = (userData) => {
 const editUser = (newUserData) => {
   return instanceWithAuth.post('/editUser', newUserData)
 }
+const editUserPwd = (newPasswordData) => {
+  return instanceWithAuth.post('/editUserPwd', newPasswordData)
+}
 
 export {
   getVideos,
@@ -81,4 +84,5 @@ export {
   checkPassword,
   checkUserData,
   editUser,
+  editUserPwd,
 }

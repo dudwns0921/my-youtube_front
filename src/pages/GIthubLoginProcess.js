@@ -14,10 +14,15 @@ function GIthubLoginProcess() {
     const githubCode = new URLSearchParams(location.search).get('code')
     if (githubCode) {
       const { data } = await githubLogin({ githubCode })
-      saveTokenToCookie(data.token)
-      saveUserToCookie(JSON.stringify(data.user))
-      setIsLogin(true)
-      navigate('/')
+      if (data.result === 'success') {
+        saveTokenToCookie(data.token)
+        saveUserToCookie(JSON.stringify(data.user))
+        setIsLogin(true)
+        navigate('/')
+      } else {
+        alert(data.message)
+        navigate('/login')
+      }
     }
   }
   return <div>Processing...</div>

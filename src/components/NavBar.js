@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { deleteCookie, getUserFromCookie } from '../utils/cookie'
+import { deleteCookie } from '../utils/cookie'
 import SearchBar from './SearchBar'
 
 const Nav = styled.nav`
