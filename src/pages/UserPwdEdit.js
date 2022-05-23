@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { editUser, editUserPwd } from '../axios/axios'
+import { useNavigate, useOutletContext } from 'react-router-dom'
+import { editUserPwd } from '../axios/axios'
 import styled from 'styled-components'
-import { getUserFromCookie, saveUserToCookie } from '../utils/cookie'
+import { getUserFromCookie, deleteCookie } from '../utils/cookie'
 
 const StyledForm = styled.form`
   display: flex;
@@ -11,6 +11,7 @@ const StyledForm = styled.form`
 `
 
 function UserPwdEdit() {
+  const [setIsLogin] = useOutletContext()
   const navigate = useNavigate()
   const [newPassword, setNewPassword] = useState('')
   const [confirmNewPassword, setConfirmNewPassword] = useState('')
@@ -31,8 +32,14 @@ function UserPwdEdit() {
 
   const handleEditUserPwd = async (e) => {
     e.preventDefault()
-    const response = await editUserPwd(newUserPwdData)
-    console.log(response)
+    const { data } = await editUserPwd(newUserPwdData)
+    if (data.result === 'success') {
+      alert('변경된 비밀번호로 다시 로그인해주세요.')
+      deleteCookie('user')
+      deleteCookie('token')
+      setIsLogin(false)
+      navigate('/login')
+    }
   }
   return (
     <div>

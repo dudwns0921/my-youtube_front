@@ -38,6 +38,7 @@ function MyPage() {
         'Loading...'
       ) : (
         <>
+          <img src="http://localhost:4000/uploads\\4cd764196f5d3f08495a3da2ca83d080" />
           <h1>이메일 : {userData.email}</h1>
           <h1>닉네임 : {userData.username}</h1>
           {isSocial === true ? (

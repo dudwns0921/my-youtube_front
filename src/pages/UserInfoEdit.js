@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { editUser } from '../axios/axios'
 import styled from 'styled-components'
 import { getUserFromCookie, saveUserToCookie } from '../utils/cookie'
+import axios from 'axios'
 
 const StyledForm = styled.form`
   display: flex;
@@ -15,14 +16,8 @@ function UserInfoEdit() {
   const [oldUserData, setOldUserData] = useState({})
   const [newEmail, setNewEmail] = useState('')
   const [newUsername, setNewUsername] = useState('')
+  const [avatarFile, setAvatarFile] = useState({})
   const [loading, setLoading] = useState(true)
-
-  let newUserData = {
-    oldEmail: oldUserData.email,
-    oldUsername: oldUserData.username,
-    newEmail,
-    newUsername,
-  }
 
   useEffect(() => {
     setData()
@@ -35,13 +30,27 @@ function UserInfoEdit() {
   }
   const handleEditUser = async (e) => {
     e.preventDefault()
-    const { data } = await editUser(newUserData)
+    let userData = new FormData()
+    userData.append('oldEmail', oldUserData.email)
+    userData.append('oldUsername', oldUserData.username)
+    userData.append('oldAvartarURL', oldUserData.avartarURL)
+    userData.append('newEmail', newEmail)
+    userData.append('newUsername', newUsername)
+    userData.append('avartar', avatarFile)
+
+    const { data } = await axios({
+      method: 'post',
+      url: '/editUser',
+      data: userData,
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+
     if (data.userData) {
       saveUserToCookie(JSON.stringify(data.userData))
       alert('정보가 수정되었습니다.')
       navigate('/mypage')
     } else {
-      alert(data.message)
+      alert(JSON.stringify(data.message))
     }
   }
   return (
@@ -49,7 +58,16 @@ function UserInfoEdit() {
       {loading ? (
         'Loading...'
       ) : (
-        <StyledForm onSubmit={handleEditUser}>
+        <StyledForm onSubmit={handleEditUser} encType="multipart/form-data">
+          <label htmlFor="avatar">Avatar</label>
+          <input
+            id="avater"
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              setAvatarFile(e.target.files[0])
+            }}
+          />
           <label htmlFor="newEmail">이메일</label>
           <input
             id="newEmail"
