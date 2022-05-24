@@ -21,7 +21,8 @@ const StyledForm = styled.form`
   }
 `
 function Login() {
-  const [setIsLogin] = useOutletContext()
+  const OutletContext = useOutletContext()
+  const setIsLogin = OutletContext[0]
   // Redux 대신 props로 state와 setState를 전달
   const [email, setId] = useState('')
   const [password, setPassword] = useState('')

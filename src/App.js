@@ -12,19 +12,28 @@ const Content = styled.div`
 
 function App() {
   const [isLogin, setIsLogin] = useState(false)
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     if (getUserFromCookie()) {
       setIsLogin(true)
     } else {
       setIsLogin(false)
     }
+    setLoading(false)
   }, [])
   return (
     <div>
-      <NavBar isLogin={isLogin} setIsLogin={setIsLogin} />
-      <Content>
-        <Outlet context={[setIsLogin]} />
-      </Content>
+      {loading ? (
+        'Loading...'
+      ) : (
+        <div>
+          {' '}
+          <NavBar isLogin={isLogin} setIsLogin={setIsLogin} />
+          <Content>
+            <Outlet context={[setIsLogin]} />
+          </Content>{' '}
+        </div>
+      )}
     </div>
   )
 }

@@ -84,6 +84,10 @@ const editUserPwd = (newPasswordData) => {
   return instanceWithAuth.post('/editUserPwd', newPasswordData)
 }
 
+const getVideosWithUserId = (userId) => {
+  return instanceWithAuth.post('/myVideos', userId)
+}
+
 export {
   getVideos,
   getVideoWithId,
@@ -98,4 +102,5 @@ export {
   checkUserData,
   editUser,
   editUserPwd,
+  getVideosWithUserId,
 }
