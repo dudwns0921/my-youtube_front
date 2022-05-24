@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { getUserFromCookie } from '../utils/cookie'
 import { checkPassword, checkUserData } from '../axios/axios'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+
+const StyledImg = styled.img`
+  width: 100px;
+  height: 100px;
+`
 
 function MyPage() {
   const navigate = useNavigate()
@@ -38,7 +44,9 @@ function MyPage() {
         'Loading...'
       ) : (
         <>
-          <img src="http://localhost:4000/uploads\\4cd764196f5d3f08495a3da2ca83d080" />
+          <StyledImg
+            src={`${process.env.REACT_APP_SERVER_BASE_URL}${userData.avartarURL}`}
+          />
           <h1>이메일 : {userData.email}</h1>
           <h1>닉네임 : {userData.username}</h1>
           {isSocial === true ? (
