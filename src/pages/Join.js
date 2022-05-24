@@ -37,8 +37,6 @@ function Join() {
     if (data.result === 'success') {
       alert('회원가입에 성공했습니다.')
       navigate('/login')
-    } else {
-      alert(data.message)
     }
   }
   return (

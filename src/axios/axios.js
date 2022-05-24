@@ -24,7 +24,20 @@ const createInstanceWithAuth = () => {
   return setInterceptor(instance)
 }
 
+// 토큰, 폼데이터 헤더 axios 객체
+
+const createInstanceWithFormData = () => {
+  const instance = axios.create({
+    baseURL: API_HOST,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+  return setInterceptor(instance)
+}
+
 const instanceWithAuth = createInstanceWithAuth()
+const instanceWithFormData = createInstanceWithFormData()
 
 // 토큰 인증 필요없는 api
 
@@ -50,7 +63,7 @@ const githubLogin = (githubCode) => {
 // 토큰 인증 필요한 api
 
 function uploadVideo(videoObj) {
-  return instanceWithAuth.post('/videoUpload', videoObj)
+  return instanceWithFormData.post('/videoUpload', videoObj)
 }
 const editVideo = (payload) => {
   return instanceWithAuth.post('/videoEdit', payload)
@@ -65,7 +78,7 @@ const checkUserData = (userData) => {
   return instanceWithAuth.post('/checkUserData', userData)
 }
 const editUser = (newUserData) => {
-  return instanceWithAuth.post('/editUser', newUserData)
+  return instanceWithFormData.post('/editUser', newUserData)
 }
 const editUserPwd = (newPasswordData) => {
   return instanceWithAuth.post('/editUserPwd', newPasswordData)

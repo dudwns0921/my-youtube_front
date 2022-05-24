@@ -19,9 +19,6 @@ function GIthubLoginProcess() {
         saveUserToCookie(JSON.stringify(data.user))
         setIsLogin(true)
         navigate('/')
-      } else {
-        alert(data.message)
-        navigate('/login')
       }
     }
   }

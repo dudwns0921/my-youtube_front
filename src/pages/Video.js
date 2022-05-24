@@ -26,6 +26,10 @@ function Video() {
       ) : (
         <>
           <h1>{video.title}</h1>
+          <video
+            src={`${process.env.REACT_APP_SERVER_BASE_URL}${video.videoURL}`}
+            controls
+          />
           <Link to={`/videoEdit/${id}`}>Edit Video→</Link>
         </>
       )}

@@ -7,6 +7,7 @@ import styled from 'styled-components'
 const StyledImg = styled.img`
   width: 100px;
   height: 100px;
+  border-radius: 50%;
 `
 
 function MyPage() {
@@ -16,17 +17,9 @@ function MyPage() {
   const [isSocial, setIsSocial] = useState(false)
   useEffect(() => {
     setUserData(JSON.parse(getUserFromCookie()))
-    checkSocialLogin(JSON.parse(getUserFromCookie()))
+    setIsSocial(JSON.parse(getUserFromCookie()).isSocial)
     setLoading(false)
   }, [])
-  const checkSocialLogin = async (userData) => {
-    const { data } = await checkUserData(userData)
-    if (data.exist === true) {
-      setIsSocial(false)
-    } else {
-      setIsSocial(true)
-    }
-  }
   const handleNavigteEdit = async () => {
     let password = window.prompt(
       '본인 확인을 위해 비밀번호를 다시 입력해주세요.'
@@ -45,7 +38,11 @@ function MyPage() {
       ) : (
         <>
           <StyledImg
-            src={`${process.env.REACT_APP_SERVER_BASE_URL}${userData.avartarURL}`}
+            src={
+              isSocial
+                ? userData.avatarURL
+                : `${process.env.REACT_APP_SERVER_BASE_URL}${userData.avatarURL}`
+            }
           />
           <h1>이메일 : {userData.email}</h1>
           <h1>닉네임 : {userData.username}</h1>

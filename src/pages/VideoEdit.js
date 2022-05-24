@@ -56,8 +56,6 @@ function VideoEdit() {
       if (data.result === 'success') {
         alert(data.result)
         navigate('/')
-      } else {
-        alert(data.message)
       }
     }
   }

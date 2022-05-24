@@ -16,7 +16,7 @@ function UserInfoEdit() {
   const [oldUserData, setOldUserData] = useState({})
   const [newEmail, setNewEmail] = useState('')
   const [newUsername, setNewUsername] = useState('')
-  const [avatarFile, setAvatarFile] = useState({})
+  const [avatarFile, setAvatarFile] = useState('')
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -33,24 +33,18 @@ function UserInfoEdit() {
     let userData = new FormData()
     userData.append('oldEmail', oldUserData.email)
     userData.append('oldUsername', oldUserData.username)
-    userData.append('oldAvartarURL', oldUserData.avartarURL)
+    userData.append('oldAvatarURL', oldUserData.avatarURL)
     userData.append('newEmail', newEmail)
     userData.append('newUsername', newUsername)
-    userData.append('avartar', avatarFile)
+    userData.append('avatar', avatarFile)
 
-    const { data } = await axios({
-      method: 'post',
-      url: '/editUser',
-      data: userData,
-      headers: { 'Content-Type': 'multipart/form-data' },
-    })
+    const { data } = await editUser(userData)
+    console.log(data)
 
     if (data.userData) {
       saveUserToCookie(JSON.stringify(data.userData))
       alert('정보가 수정되었습니다.')
       navigate('/mypage')
-    } else {
-      alert(JSON.stringify(data.message))
     }
   }
   return (
@@ -58,10 +52,10 @@ function UserInfoEdit() {
       {loading ? (
         'Loading...'
       ) : (
-        <StyledForm onSubmit={handleEditUser} encType="multipart/form-data">
+        <StyledForm onSubmit={handleEditUser}>
           <label htmlFor="avatar">Avatar</label>
           <input
-            id="avater"
+            id="avatar"
             type="file"
             accept="image/*"
             onChange={(e) => {

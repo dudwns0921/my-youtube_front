@@ -11,27 +11,37 @@ const StyledForm = styled.form`
 
 function Upload() {
   const navigate = useNavigate()
+  const [videoFile, setVideoFile] = useState('')
   const [title, setTitle] = useState('')
   const [desc, setDesc] = useState('')
   const [hashtags, setHashtags] = useState('')
-  let videoObj = {
-    title: title,
-    description: desc,
-    hashtags: hashtags,
-  }
   const handleUploadVideo = async (e) => {
     e.preventDefault()
-    const { data } = await uploadVideo(videoObj)
+    let videoData = new FormData()
+    videoData.append('title', title)
+    videoData.append('description', desc)
+    videoData.append('hashtags', hashtags)
+    videoData.append('videoFile', videoFile)
+
+    const { data } = await uploadVideo(videoData)
     if (data.result === 'success') {
       alert(data.result)
       navigate('/')
-    } else {
-      alert(data.message)
     }
   }
   return (
     <div>
       <StyledForm onSubmit={handleUploadVideo}>
+        <label htmlFor="videoFile">비디오</label>
+        <input
+          id="videoFile"
+          type="file"
+          accept="video/*"
+          required
+          onChange={(e) => {
+            setVideoFile(e.target.files[0])
+          }}
+        />
         <label htmlFor="title">제목</label>
         <input
           id="title"
