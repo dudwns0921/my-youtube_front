@@ -6,6 +6,10 @@ import SearchBar from './SearchBar'
 
 const Nav = styled.nav`
   display: flex;
+  span {
+    margin-right: 1rem;
+    cursor: pointer;
+  }
 `
 
 const StyledLink = styled(Link)`
@@ -26,10 +30,9 @@ function NavBar(props) {
       <StyledLink to="/">Home</StyledLink>
       {props.isLogin ? (
         <>
-          <button type="button" onClick={handleLogout}>
-            Logout
-          </button>
+          <span onClick={handleLogout}>Logout</span>
           <StyledLink to="/mypage">Mypage</StyledLink>
+          <StyledLink to="/upload">Upload</StyledLink>
         </>
       ) : (
         <>
@@ -37,7 +40,6 @@ function NavBar(props) {
           <StyledLink to="/join">Join</StyledLink>
         </>
       )}
-      <StyledLink to="/upload">Upload</StyledLink>
       <SearchBar />
     </Nav>
   )

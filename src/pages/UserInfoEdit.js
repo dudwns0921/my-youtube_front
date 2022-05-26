@@ -39,10 +39,9 @@ function UserInfoEdit() {
     userData.append('avatar', avatarFile)
 
     const { data } = await editUser(userData)
-    console.log(data)
 
-    if (data.userData) {
-      saveUserToCookie(JSON.stringify(data.userData))
+    if (data) {
+      saveUserToCookie(JSON.stringify(data))
       alert('정보가 수정되었습니다.')
       navigate('/mypage')
     }

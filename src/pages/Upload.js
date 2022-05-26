@@ -18,8 +18,10 @@ function Upload() {
   const [desc, setDesc] = useState('')
   const [hashtags, setHashtags] = useState('')
   useEffect(() => {
-    setUserData(JSON.parse(getUserFromCookie()))
-  })
+    if (getUserFromCookie()) {
+      setUserData(JSON.parse(getUserFromCookie()))
+    }
+  }, [])
 
   const handleUploadVideo = async (e) => {
     e.preventDefault()
@@ -77,7 +79,9 @@ function Upload() {
             setHashtags(e.target.value)
           }}
         />
-        <input type="submit" value="전송" />
+        <button type="button" onClick={handleUploadVideo}>
+          업로드
+        </button>
       </StyledForm>
     </div>
   )

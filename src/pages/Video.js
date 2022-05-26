@@ -2,6 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { getVideoWithId } from '../axios/axios'
 import { getUserFromCookie } from '../utils/cookie'
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+  display: flex;
+  width: 70%;
+  flex-direction: column;
+`
 
 function Video() {
   let { id } = useParams()
@@ -10,17 +17,17 @@ function Video() {
   const [video, setVideo] = useState({})
   const [loading, setLoading] = useState(true)
 
-  const getVideo = async (id) => {
+  const getVideo = async () => {
     const { data } = await getVideoWithId({ id })
     if (data) {
       setVideo(data)
-    } else {
-      navigate('/404')
     }
   }
   useEffect(() => {
-    getVideo(id)
-    setUserData(JSON.parse(getUserFromCookie()))
+    getVideo()
+    if (getUserFromCookie()) {
+      setUserData(JSON.parse(getUserFromCookie()))
+    }
     setLoading(false)
   }, [])
 
@@ -29,8 +36,9 @@ function Video() {
       {loading ? (
         'Loading...'
       ) : (
-        <>
+        <Wrapper>
           <h1>{video.title}</h1>
+          <h1 style={{ color: 'blue' }}>{video.hashtags}</h1>
           <video
             src={`${process.env.REACT_APP_SERVER_BASE_URL}${video.videoURL}`}
             controls
@@ -40,7 +48,7 @@ function Video() {
           ) : (
             ''
           )}
-        </>
+        </Wrapper>
       )}
     </div>
   )

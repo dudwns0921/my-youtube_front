@@ -21,7 +21,9 @@ import UserInfoEdit from './pages/UserInfoEdit'
 import UserPwdEdit from './pages/UserPwdEdit'
 
 const GlobalStyles = createGlobalStyle`
-  box-sizing: border-box;
+  *{
+    box-sizing: border-box;
+  }
   ${reset}
 `
 

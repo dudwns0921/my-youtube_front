@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom'
 import { getVideos } from '../axios/axios'
 import { formatDate } from '../utils/utils'
 import _ from 'lodash'
+import Thumbnail from '../components/Thumbnail'
+import styled from 'styled-components'
+
+const Container = styled.div`
+  display: flex;
+`
 
 function Home() {
   useEffect(() => {
@@ -18,23 +24,15 @@ function Home() {
   }
 
   return (
-    <div>
+    <Container>
       {loading
         ? 'Loading...'
         : videos.length > 0
         ? videos.map((video) => {
-            return (
-              <div key={video.createdAt}>
-                <Link to={`video/${video._id}`}>{video.title}</Link>
-                <h2>{formatDate(video.createdAt)}</h2>
-                <h2>{video.hashtags}</h2>
-                <h2>{video.meta.views}</h2>
-                <p>{video.description}</p>
-              </div>
-            )
+            return <Thumbnail key={video.createdAt} videoObj={video} />
           })
         : 'No Videos'}
-    </div>
+    </Container>
   )
 }
 

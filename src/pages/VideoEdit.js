@@ -34,9 +34,11 @@ function VideoEdit() {
     setNewTitle(data.title)
     setNewDesc(data.description)
     setNewHashtags(
-      data.hashtags.map((item) => {
-        return item.substr(1)
-      })
+      data.hashtags
+        .map((item) => {
+          return item.substr(1)
+        })
+        .join(',')
     )
     setLoading(false)
   }

@@ -53,7 +53,7 @@ function UserPwdEdit() {
             setNewPassword(e.target.value)
           }}
         />
-        <label htmlFor="confirmPassword">새 비밀번호 획인</label>
+        <label htmlFor="confirmPassword">새 비밀번호 확인</label>
         <input
           id="confirmPassword"
           type="password"
