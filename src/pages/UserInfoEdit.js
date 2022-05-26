@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useOutletContext } from 'react-router-dom'
 import { editUser } from '../axios/axios'
 import styled from 'styled-components'
-import { getUserFromCookie, saveUserToCookie } from '../utils/cookie'
-import axios from 'axios'
+import { saveUserToCookie } from '../utils/cookie'
 
 const StyledForm = styled.form`
   display: flex;
@@ -12,40 +11,43 @@ const StyledForm = styled.form`
 `
 
 function UserInfoEdit() {
+  const outletContext = useOutletContext()
   const navigate = useNavigate()
-  const [oldUserData, setOldUserData] = useState({})
+  const oldUserData = outletContext[1]
+  const setUserData = outletContext[2]
   const [newEmail, setNewEmail] = useState('')
   const [newUsername, setNewUsername] = useState('')
   const [avatarFile, setAvatarFile] = useState('')
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    setData()
-  }, [])
-  const setData = async () => {
-    setOldUserData(JSON.parse(getUserFromCookie()))
-    setNewEmail(JSON.parse(getUserFromCookie()).email)
-    setNewUsername(JSON.parse(getUserFromCookie()).username)
+  const setData = () => {
+    setNewEmail(oldUserData.email)
+    setNewUsername(oldUserData.username)
     setLoading(false)
   }
   const handleEditUser = async (e) => {
     e.preventDefault()
-    let userData = new FormData()
-    userData.append('oldEmail', oldUserData.email)
-    userData.append('oldUsername', oldUserData.username)
-    userData.append('oldAvatarURL', oldUserData.avatarURL)
-    userData.append('newEmail', newEmail)
-    userData.append('newUsername', newUsername)
-    userData.append('avatar', avatarFile)
+    let payload = new FormData()
+    payload.append('oldEmail', oldUserData.email)
+    payload.append('oldUsername', oldUserData.username)
+    payload.append('oldAvatarURL', oldUserData.avatarURL)
+    payload.append('newEmail', newEmail)
+    payload.append('newUsername', newUsername)
+    payload.append('avatar', avatarFile)
 
-    const { data } = await editUser(userData)
+    const { data } = await editUser(payload)
 
     if (data) {
       saveUserToCookie(JSON.stringify(data))
+      setUserData(data)
       alert('정보가 수정되었습니다.')
       navigate('/mypage')
     }
   }
+
+  useEffect(() => {
+    setData()
+  }, [])
   return (
     <div>
       {loading ? (

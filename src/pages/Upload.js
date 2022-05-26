@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useOutletContext } from 'react-router-dom'
 import { uploadVideo } from '../axios/axios'
-import { getUserFromCookie } from '../utils/cookie'
 
 const StyledForm = styled.form`
   display: flex;
@@ -11,17 +10,13 @@ const StyledForm = styled.form`
 `
 
 function Upload() {
+  const outletContext = useOutletContext()
   const navigate = useNavigate()
-  const [userData, setUserData] = useState('')
+  const userData = outletContext[1]
   const [videoFile, setVideoFile] = useState('')
   const [title, setTitle] = useState('')
   const [desc, setDesc] = useState('')
   const [hashtags, setHashtags] = useState('')
-  useEffect(() => {
-    if (getUserFromCookie()) {
-      setUserData(JSON.parse(getUserFromCookie()))
-    }
-  }, [])
 
   const handleUploadVideo = async (e) => {
     e.preventDefault()

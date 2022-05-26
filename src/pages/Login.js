@@ -21,13 +21,14 @@ const StyledForm = styled.form`
   }
 `
 function Login() {
-  const OutletContext = useOutletContext()
-  const setIsLogin = OutletContext[0]
+  const outletContext = useOutletContext()
+  const setIsLogin = outletContext[0]
+  const setUserData = outletContext[2]
   // Redux 대신 props로 state와 setState를 전달
   const [email, setId] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
-  let userData = {
+  let payload = {
     email,
     password,
   }
@@ -44,12 +45,13 @@ function Login() {
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const { data } = await loginUser(userData)
+    const { data } = await loginUser(payload)
     if (data.result === 'success') {
       saveTokenToCookie(data.token)
-      saveUserToCookie(JSON.stringify(data.user))
+      saveUserToCookie(JSON.stringify(data.userData))
       if (getTokenFromCookie() && getUserFromCookie()) {
         setIsLogin(true)
+        setUserData(data.userData)
         navigate('/')
       }
     }

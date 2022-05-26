@@ -7,9 +7,9 @@ function GIthubLoginProcess() {
   const [setIsLogin] = useOutletContext()
   const navigate = useNavigate()
   const location = useLocation()
-  // useEffect(() => {
-  //   checkGithubLogin()
-  // }, [])
+  useEffect(() => {
+    checkGithubLogin()
+  }, [])
   const checkGithubLogin = async () => {
     const githubCode = new URLSearchParams(location.search).get('code')
     if (githubCode) {
@@ -22,12 +22,7 @@ function GIthubLoginProcess() {
       }
     }
   }
-  return (
-    <div>
-      Processing...
-      <button onClick={checkGithubLogin}>깃허브 로그인 시도</button>
-    </div>
-  )
+  return <div>Processing...</div>
 }
 
 export default GIthubLoginProcess

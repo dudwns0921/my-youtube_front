@@ -44,48 +44,48 @@ const instanceWithFormData = createInstanceWithFormData()
 function getVideos() {
   return instance.get('/videoFindAll')
 }
-function getVideoWithId(id) {
-  return instance.post('/videoFind', id)
+function getVideoWithId(payload) {
+  return instance.post('/videoFind', payload)
 }
-const searchVideo = (keyword) => {
-  return instance.post('/videosearch', keyword)
+const searchVideo = (payload) => {
+  return instance.post('/videosearch', payload)
 }
-function loginUser(userData) {
-  return instance.post('/login', userData)
+function loginUser(payload) {
+  return instance.post('/login', payload)
 }
-function joinUser(userData) {
-  return instance.post('/join', userData)
+function joinUser(payload) {
+  return instance.post('/join', payload)
 }
-const githubLogin = (githubCode) => {
-  return instance.post('/githubLogin', githubCode)
+const githubLogin = (payload) => {
+  return instance.post('/githubLogin', payload)
 }
 
 // 토큰 인증 필요한 api
 
-function uploadVideo(videoObj) {
-  return instanceWithFormData.post('/videoUpload', videoObj)
+function uploadVideo(payload) {
+  return instanceWithFormData.post('/videoUpload', payload)
 }
 const editVideo = (payload) => {
   return instanceWithAuth.post('/videoEdit', payload)
 }
-const deleteVideo = (id) => {
-  return instanceWithAuth.post('/videoDelete', id)
+const deleteVideo = (payload) => {
+  return instanceWithAuth.post('/videoDelete', payload)
 }
-const checkPassword = (password) => {
-  return instanceWithAuth.post('/checkPassword', password)
+const checkPassword = (payload) => {
+  return instanceWithAuth.post('/checkPassword', payload)
 }
-const checkUserData = (userData) => {
-  return instanceWithAuth.post('/checkUserData', userData)
+const checkUserData = (payload) => {
+  return instanceWithAuth.post('/checkUserData', payload)
 }
-const editUser = (newUserData) => {
-  return instanceWithFormData.post('/editUser', newUserData)
+const editUser = (payload) => {
+  return instanceWithFormData.post('/editUser', payload)
 }
-const editUserPwd = (newPasswordData) => {
-  return instanceWithAuth.post('/editUserPwd', newPasswordData)
+const editUserPwd = (payload) => {
+  return instanceWithAuth.post('/editUserPwd', payload)
 }
 
-const getVideosWithUserId = (userId) => {
-  return instanceWithAuth.post('/myVideos', userId)
+const getVideosWithUserId = (payload) => {
+  return instanceWithAuth.post('/myVideos', payload)
 }
 
 export {

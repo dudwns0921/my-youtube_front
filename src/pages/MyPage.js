@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { getUserFromCookie } from '../utils/cookie'
 import { checkPassword, getVideosWithUserId } from '../axios/axios'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useOutletContext } from 'react-router-dom'
 import styled from 'styled-components'
 import Thumbnail from '../components/Thumbnail'
 
@@ -20,25 +20,19 @@ const Container = styled.div`
 `
 
 function MyPage() {
+  const outletContext = useOutletContext()
   const navigate = useNavigate()
-  const [userData, setUserData] = useState({})
+  const userData = outletContext[1]
   const [myVideos, setMyVideos] = useState([])
   const [loading, setLoading] = useState(true)
   const [isSocial, setIsSocial] = useState(false)
-  useEffect(() => {
-    if (getUserFromCookie()) {
-      setUserData(JSON.parse(getUserFromCookie()))
-      setIsSocial(JSON.parse(getUserFromCookie()).isSocial)
-      getMyVideos(JSON.parse(getUserFromCookie()).id)
-    }
-    setLoading(false)
-  }, [])
 
-  const getMyVideos = async (userId) => {
-    const { data } = await getVideosWithUserId({ userId: userId })
+  const setData = async () => {
+    const { data } = await getVideosWithUserId({ userId: userData.id })
     setMyVideos(data)
+    setIsSocial(JSON.parse(getUserFromCookie()).isSocial)
   }
-  const handleNavigteEdit = async () => {
+  const handleNavigateEdit = async () => {
     let password = window.prompt(
       '본인 확인을 위해 비밀번호를 다시 입력해주세요.'
     )
@@ -49,6 +43,14 @@ function MyPage() {
       alert('비밀번호가 맞지 않습니다!')
     }
   }
+
+  useEffect(() => {
+    if (userData) {
+      console.log(userData)
+      setData()
+    }
+    setLoading(false)
+  }, [])
   return (
     <div>
       {loading ? (
@@ -68,7 +70,7 @@ function MyPage() {
             {isSocial === true ? (
               '소셜 로그인 계정은 정보를 수정할 수 없습니다.'
             ) : (
-              <button onClick={handleNavigteEdit}>정보 수정하기</button>
+              <button onClick={handleNavigateEdit}>정보 수정하기</button>
             )}
           </div>
         </UserInfo>

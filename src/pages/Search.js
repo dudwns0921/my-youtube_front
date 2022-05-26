@@ -14,9 +14,7 @@ function Search() {
   }
   useEffect(() => {
     getVideosWithKeyword()
-  }, []),
-    []
-
+  }, [])
   return (
     <div>
       {loading ? (

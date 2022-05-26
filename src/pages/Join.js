@@ -17,10 +17,19 @@ function Join() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false)
 
-  let userData = {
+  let payload = {
     email,
     username,
     password,
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const { data } = await joinUser(payload)
+    if (data.result === 'success') {
+      alert('회원가입에 성공했습니다.')
+      navigate('/login')
+    }
   }
 
   useEffect(() => {
@@ -30,15 +39,6 @@ function Join() {
       setIsPasswordConfirmed(false)
     }
   }, [password, confirmPassword])
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    const { data } = await joinUser(userData)
-    if (data.result === 'success') {
-      alert('회원가입에 성공했습니다.')
-      navigate('/login')
-    }
-  }
   return (
     <StyledForm onSubmit={handleSubmit}>
       <label htmlFor="id">이메일</label>

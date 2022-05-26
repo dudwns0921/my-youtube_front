@@ -9,17 +9,18 @@ const StyledForm = styled.form`
   flex-direction: column;
   width: 30%;
 `
-
 function UserPwdEdit() {
-  const [setIsLogin] = useOutletContext()
+  const outletContext = useOutletContext()
+  const setIsLogin = outletContext[0]
+  const userData = outletContext[1]
   const navigate = useNavigate()
   const [newPassword, setNewPassword] = useState('')
   const [confirmNewPassword, setConfirmNewPassword] = useState('')
   const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false)
 
-  let newUserPwdData = {
+  let payload = {
     newPassword,
-    userEmail: JSON.parse(getUserFromCookie()).email,
+    userEmail: userData.email,
   }
 
   useEffect(() => {
@@ -32,7 +33,7 @@ function UserPwdEdit() {
 
   const handleEditUserPwd = async (e) => {
     e.preventDefault()
-    const { data } = await editUserPwd(newUserPwdData)
+    const { data } = await editUserPwd(payload)
     if (data.result === 'success') {
       alert('변경된 비밀번호로 다시 로그인해주세요.')
       deleteCookie('user')
