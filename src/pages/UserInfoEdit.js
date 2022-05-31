@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useOutletContext } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { editUser } from '../axios/axios'
 import styled from 'styled-components'
-import { saveUserToCookie } from '../utils/cookie'
+import { useDispatch, useSelector } from 'react-redux'
+import { insert } from '../redux/slicer/userDataSlice'
 
 const StyledForm = styled.form`
   display: flex;
@@ -11,10 +12,9 @@ const StyledForm = styled.form`
 `
 
 function UserInfoEdit() {
-  const outletContext = useOutletContext()
+  const oldUserData = useSelector((state) => state.userData.value)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
-  const oldUserData = outletContext[1]
-  const setUserData = outletContext[2]
   const [newEmail, setNewEmail] = useState('')
   const [newUsername, setNewUsername] = useState('')
   const [avatarFile, setAvatarFile] = useState('')
@@ -38,8 +38,7 @@ function UserInfoEdit() {
     const { data } = await editUser(payload)
 
     if (data) {
-      saveUserToCookie(JSON.stringify(data))
-      setUserData(data)
+      dispatch(insert(data))
       alert('정보가 수정되었습니다.')
       navigate('/mypage')
     }

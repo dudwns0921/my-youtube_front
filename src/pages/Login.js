@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { useNavigate, useOutletContext } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { login } from '../redux/slicer/isLoginSlice'
+import { insert } from '../redux/slicer/userDataSlice'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { loginUser } from '../axios/axios'
 import {
   getTokenFromCookie,
-  getUserFromCookie,
   saveTokenToCookie,
   saveUserToCookie,
 } from '../utils/cookie'
@@ -21,12 +23,9 @@ const StyledForm = styled.form`
   }
 `
 function Login() {
-  const outletContext = useOutletContext()
-  const setIsLogin = outletContext[0]
-  const setUserData = outletContext[2]
-  // Redux 대신 props로 state와 setState를 전달
   const [email, setId] = useState('')
   const [password, setPassword] = useState('')
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   let payload = {
     email,
@@ -49,9 +48,9 @@ function Login() {
     if (data.result === 'success') {
       saveTokenToCookie(data.token)
       saveUserToCookie(JSON.stringify(data.userData))
-      if (getTokenFromCookie() && getUserFromCookie()) {
-        setIsLogin(true)
-        setUserData(data.userData)
+      dispatch(insert(data.userData))
+      if (getTokenFromCookie()) {
+        dispatch(login())
         navigate('/')
       }
     }
@@ -69,7 +68,7 @@ function Login() {
       <label htmlFor="password">비밀번호</label>
       <input
         id="password"
-        type="text"
+        type="password"
         onChange={(e) => {
           setPassword(e.target.value)
         }}

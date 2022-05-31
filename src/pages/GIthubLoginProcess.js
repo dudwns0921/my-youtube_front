@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react'
 import { githubLogin } from '../axios/axios'
-import { useNavigate, useLocation, useOutletContext } from 'react-router-dom'
-import { saveTokenToCookie, saveUserToCookie } from '../utils/cookie'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { saveTokenToCookie } from '../utils/cookie'
+import { useDispatch } from 'react-redux'
+import { login } from '../redux/slicer/isLoginSlice'
+import { insert } from '../redux/slicer/userDataSlice'
 
 function GIthubLoginProcess() {
-  const [setIsLogin] = useOutletContext()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
   useEffect(() => {
@@ -16,8 +19,8 @@ function GIthubLoginProcess() {
       const { data } = await githubLogin({ githubCode })
       if (data.result === 'success') {
         saveTokenToCookie(data.token)
-        saveUserToCookie(JSON.stringify(data.user))
-        setIsLogin(true)
+        dispatch(insert(data.user))
+        dispatch(login())
         navigate('/')
       }
     }

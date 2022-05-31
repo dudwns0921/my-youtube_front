@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { getUserFromCookie } from '../utils/cookie'
 import { checkPassword, getVideosWithUserId } from '../axios/axios'
-import { useNavigate, useOutletContext } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import Thumbnail from '../components/Thumbnail'
 
@@ -20,9 +20,8 @@ const Container = styled.div`
 `
 
 function MyPage() {
-  const outletContext = useOutletContext()
+  const userData = useSelector((state) => state.userData.value)
   const navigate = useNavigate()
-  const userData = outletContext[1]
   const [myVideos, setMyVideos] = useState([])
   const [loading, setLoading] = useState(true)
   const [isSocial, setIsSocial] = useState(false)
@@ -30,7 +29,7 @@ function MyPage() {
   const setData = async () => {
     const { data } = await getVideosWithUserId({ userId: userData.id })
     setMyVideos(data)
-    setIsSocial(JSON.parse(getUserFromCookie()).isSocial)
+    setIsSocial(userData.isSocial)
   }
   const handleNavigateEdit = async () => {
     let password = window.prompt(
@@ -46,7 +45,6 @@ function MyPage() {
 
   useEffect(() => {
     if (userData) {
-      console.log(userData)
       setData()
     }
     setLoading(false)

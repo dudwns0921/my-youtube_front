@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { getVideoWithId } from '../axios/axios'
-import { getUserFromCookie } from '../utils/cookie'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,8 +12,7 @@ const Wrapper = styled.div`
 
 function Video() {
   let { id } = useParams()
-  const navigate = useNavigate()
-  const [userData, setUserData] = useState({})
+  const userData = useSelector((state) => state.userData.value)
   const [video, setVideo] = useState({})
   const [loading, setLoading] = useState(true)
 
@@ -25,9 +24,6 @@ function Video() {
   }
   useEffect(() => {
     getVideo()
-    if (getUserFromCookie()) {
-      setUserData(JSON.parse(getUserFromCookie()))
-    }
     setLoading(false)
   }, [])
 

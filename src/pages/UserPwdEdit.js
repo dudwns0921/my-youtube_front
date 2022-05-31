@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useOutletContext } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { editUserPwd } from '../axios/axios'
 import styled from 'styled-components'
-import { getUserFromCookie, deleteCookie } from '../utils/cookie'
+import { deleteCookie } from '../utils/cookie'
+import { useDispatch } from 'react-redux'
+import { logout } from '../redux/slicer/isLoginSlice'
+import { useSelector } from 'react-redux'
 
 const StyledForm = styled.form`
   display: flex;
@@ -10,10 +13,9 @@ const StyledForm = styled.form`
   width: 30%;
 `
 function UserPwdEdit() {
-  const outletContext = useOutletContext()
-  const setIsLogin = outletContext[0]
-  const userData = outletContext[1]
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const userData = useSelector((state) => state.userData.value)
   const [newPassword, setNewPassword] = useState('')
   const [confirmNewPassword, setConfirmNewPassword] = useState('')
   const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false)
@@ -36,9 +38,8 @@ function UserPwdEdit() {
     const { data } = await editUserPwd(payload)
     if (data.result === 'success') {
       alert('변경된 비밀번호로 다시 로그인해주세요.')
-      deleteCookie('user')
       deleteCookie('token')
-      setIsLogin(false)
+      dispatch(logout())
       navigate('/login')
     }
   }

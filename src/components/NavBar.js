@@ -3,6 +3,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { deleteCookie } from '../utils/cookie'
 import SearchBar from './SearchBar'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../redux/slicer/isLoginSlice'
+import { remove } from '../redux/slicer/userDataSlice'
 
 const Nav = styled.nav`
   display: flex;
@@ -16,19 +19,22 @@ const StyledLink = styled(Link)`
   margin-right: 1rem;
 `
 
-function NavBar(props) {
+function NavBar() {
+  const isLogin = useSelector((state) => state.isLogin.value)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleLogout = () => {
     deleteCookie('user')
     deleteCookie('token')
-    props.setIsLogin(false)
+    dispatch(logout())
+    dispatch(remove())
     navigate('/')
   }
   return (
     <Nav>
       <StyledLink to="/">Home</StyledLink>
-      {props.isLogin ? (
+      {isLogin ? (
         <>
           <span onClick={handleLogout}>Logout</span>
           <StyledLink to="/mypage">Mypage</StyledLink>

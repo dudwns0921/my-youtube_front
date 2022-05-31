@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useNavigate, useOutletContext } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { uploadVideo } from '../axios/axios'
+import { useSelector } from 'react-redux'
 
 const StyledForm = styled.form`
   display: flex;
@@ -10,9 +11,8 @@ const StyledForm = styled.form`
 `
 
 function Upload() {
-  const outletContext = useOutletContext()
+  const userData = useSelector((state) => state.userData.value)
   const navigate = useNavigate()
-  const userData = outletContext[1]
   const [videoFile, setVideoFile] = useState('')
   const [title, setTitle] = useState('')
   const [desc, setDesc] = useState('')
@@ -25,7 +25,7 @@ function Upload() {
     videoData.append('description', desc)
     videoData.append('hashtags', hashtags)
     videoData.append('videoFile', videoFile)
-    videoData.append('ownerId', userData.id)
+    videoData.append('owner', userData.id)
 
     const { data } = await uploadVideo(videoData)
     if (data.result === 'success') {
