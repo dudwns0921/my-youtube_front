@@ -25,7 +25,7 @@ function Upload() {
     videoData.append('description', desc)
     videoData.append('hashtags', hashtags)
     videoData.append('videoFile', videoFile)
-    videoData.append('owner', userData.id)
+    videoData.append('owner', userData.username)
 
     const { data } = await uploadVideo(videoData)
     if (data.result === 'success') {

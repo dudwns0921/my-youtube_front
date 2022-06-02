@@ -26,7 +26,7 @@ function Thumbnail(props) {
         </Link>
         <div>
           <h1>{props.videoObj.title}</h1>
-          <h2>업로드한 사람 이름</h2>
+          <h2>{props.videoObj.owner}</h2>
         </div>
       </Wrapper>
     </div>

@@ -34,12 +34,13 @@ function Video() {
       ) : (
         <Wrapper>
           <h1>{video.title}</h1>
+          <h1>{video.owner}</h1>
           <h1 style={{ color: 'blue' }}>{video.hashtags}</h1>
           <video
             src={`${process.env.REACT_APP_SERVER_BASE_URL}${video.videoURL}`}
             controls
           />
-          {userData.id === video.ownerId ? (
+          {userData.username === video.owner ? (
             <Link to={`/videoEdit/${id}`}>Edit Video→</Link>
           ) : (
             ''
