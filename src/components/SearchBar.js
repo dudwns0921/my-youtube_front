@@ -1,5 +1,12 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+
+const Container = styled.div`
+  input {
+    border-radius: 1rem;
+  }
+`
 
 function SearchBar() {
   const navigate = useNavigate()
@@ -9,7 +16,7 @@ function SearchBar() {
     setKeyword('')
   }
   return (
-    <div>
+    <Container>
       <input
         type="text"
         onChange={(e) => {
@@ -20,7 +27,7 @@ function SearchBar() {
       <button type="button" onClick={handleNavigateSearch}>
         검색하기
       </button>
-    </div>
+    </Container>
   )
 }
 

@@ -4,9 +4,9 @@ import styled from 'styled-components'
 import NavBar from './components/NavBar'
 
 const Content = styled.div`
-  display: flex;
-  flex-direction: column;
   border: 1px solid black;
+  padding: 0.5rem;
+  display: flex;
 `
 
 function App() {

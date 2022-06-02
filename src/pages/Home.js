@@ -5,7 +5,14 @@ import Thumbnail from '../components/Thumbnail'
 import styled from 'styled-components'
 
 const Container = styled.div`
-  display: flex;
+  display: grid;
+  width: 90%;
+  min-width: var(--app-min-width);
+  grid-gap: 0.5rem;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--component-thumbnail-width), auto)
+  );
 `
 
 function Home() {

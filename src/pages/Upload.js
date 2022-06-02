@@ -40,8 +40,8 @@ function Upload() {
         <input
           id="videoFile"
           type="file"
-          accept="video/*"
           required
+          accept="video/*"
           onChange={(e) => {
             setVideoFile(e.target.files[0])
           }}
@@ -74,9 +74,7 @@ function Upload() {
             setHashtags(e.target.value)
           }}
         />
-        <button type="button" onClick={handleUploadVideo}>
-          업로드
-        </button>
+        <button type="submit">업로드</button>
       </StyledForm>
     </div>
   )

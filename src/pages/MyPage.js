@@ -27,7 +27,7 @@ function MyPage() {
   const [isSocial, setIsSocial] = useState(false)
 
   const setData = async () => {
-    const { data } = await getVideosWithUserId({ userId: userData.id })
+    const { data } = await getVideosWithUserId({ username: userData.username })
     setMyVideos(data)
     setIsSocial(userData.isSocial)
   }

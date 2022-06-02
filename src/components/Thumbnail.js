@@ -2,34 +2,53 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-const Wrapper = styled.div`
-  padding: 0.2rem;
-  img {
-    width: 8rem;
-    height: 5rem;
-    border-radius: 1rem;
+const Container = styled.div`
+  height: var(--component-thumbnail-height);
+  max-width: var(--component-thumbnail-width);
+  background-color: black;
+  border-radius: 1rem;
+`
+const StyledLink = styled(Link)`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
+
+  div:nth-child(1) {
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    background-image: url('http://localhost:4000/static/images/defaultVideo.png');
+    background-position: center;
+    background-size: cover;
   }
-  h2 {
-    margin-top: 0.3rem;
-    font-size: 0.5rem;
+
+  div:nth-child(2) {
+    position: absolute;
+    bottom: 0;
+    padding: 0.5rem;
+    padding-top: 0;
+    h1 {
+      font-size: 2rem;
+    }
   }
 `
 
 function Thumbnail(props) {
   return (
-    <div>
-      <Wrapper>
-        <Link to={`/video/${props.videoObj._id}`}>
-          <img
-            src={`${process.env.REACT_APP_SERVER_BASE_URL}static/images/defaultVideo.jpg`}
-          ></img>
-        </Link>
+    <Container>
+      <StyledLink to={`/video/${props.videoObj._id}`}>
+        <div></div>
         <div>
           <h1>{props.videoObj.title}</h1>
           <h2>{props.videoObj.owner}</h2>
         </div>
-      </Wrapper>
-    </div>
+      </StyledLink>
+    </Container>
   )
 }
 

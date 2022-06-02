@@ -26,6 +26,12 @@ const GlobalStyles = createGlobalStyle`
   *{
     box-sizing: border-box;
   }
+  :root {
+    --app-min-width: 40.5rem;
+    --app-main-color: #F53083;
+    --component-thumbnail-width: 20rem;
+    --component-thumbnail-height: 30rem;
+  }
   ${reset}
 `
 
