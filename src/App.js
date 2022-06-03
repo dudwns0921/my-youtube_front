@@ -3,21 +3,27 @@ import { Outlet, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import NavBar from './components/NavBar'
 
+const Container = styled.div`
+  display: grid;
+  height: 100vh;
+  grid-template-rows: 1fr 9fr;
+`
+
 const Content = styled.div`
-  border: 1px solid black;
   padding: 0.5rem;
   display: flex;
+  background-color: #011627;
 `
 
 function App() {
   const location = useLocation()
   return (
-    <div>
+    <Container>
       <NavBar />
       <Content>
         <Outlet key={location.key} />
       </Content>
-    </div>
+    </Container>
   )
 }
 

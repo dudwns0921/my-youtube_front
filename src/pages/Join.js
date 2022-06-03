@@ -3,12 +3,46 @@ import styled from 'styled-components'
 import { joinUser } from '../axios/axios'
 import { useNavigate } from 'react-router-dom'
 
+const Container = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 30%;
+  min-width: 35rem;
+  min-height: 30rem;
+  background-color: white;
+  padding: 3rem;
+  input {
+    padding: 1rem;
+    border: none;
+    background-color: #f2f2f2;
+    height: 4rem;
+    margin-bottom: 1rem;
+    &:focus {
+      outline: none;
+    }
+  }
+  button {
+    color: white;
+    border: none;
+    cursor: pointer;
+    height: 4rem;
+    background-color: var(--app-main-color);
+    &:disabled {
+      opacity: 0.2;
+    }
+  }
+  p {
+    margin-bottom: 1rem;
+  }
 `
-
 function Join() {
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
@@ -40,52 +74,50 @@ function Join() {
     }
   }, [password, confirmPassword])
   return (
-    <StyledForm onSubmit={handleSubmit}>
-      <label htmlFor="id">이메일</label>
-      <input
-        id="id"
-        type="text"
-        required
-        onChange={(e) => {
-          setEmail(e.target.value)
-        }}
-      />
-      <label htmlFor="username">닉네임</label>
-      <input
-        id="username"
-        type="text"
-        required
-        onChange={(e) => {
-          setUsername(e.target.value)
-        }}
-      />
-      <label htmlFor="password">비밀번호</label>
-      <input
-        id="password"
-        type="password"
-        required
-        onChange={(e) => {
-          setPassword(e.target.value)
-        }}
-      />
-      <label htmlFor="confirmPassword">비밀번호 획인</label>
-      <input
-        id="confirmPassword"
-        type="password"
-        required
-        onChange={(e) => {
-          setConfirmPassword(e.target.value)
-        }}
-      />
-      {isPasswordConfirmed ? (
-        ''
-      ) : (
-        <p style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</p>
-      )}
-      <button disabled={isPasswordConfirmed ? false : true} type="submit">
-        회원가입
-      </button>
-    </StyledForm>
+    <Container>
+      <StyledForm onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="email"
+          required
+          onChange={(e) => {
+            setEmail(e.target.value)
+          }}
+        />
+        <input
+          type="text"
+          placeholder="username"
+          required
+          onChange={(e) => {
+            setUsername(e.target.value)
+          }}
+        />
+        <input
+          type="password"
+          placeholder="password"
+          required
+          onChange={(e) => {
+            setPassword(e.target.value)
+          }}
+        />
+        <input
+          type="password"
+          placeholder="password confirm"
+          required
+          onChange={(e) => {
+            setConfirmPassword(e.target.value)
+          }}
+        />
+        {isPasswordConfirmed ? (
+          ''
+        ) : (
+          <p style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</p>
+        )}
+        <button disabled={isPasswordConfirmed ? false : true} type="submit">
+          Join
+        </button>
+      </StyledForm>
+    </Container>
   )
 }
 

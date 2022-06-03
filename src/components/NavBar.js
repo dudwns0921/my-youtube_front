@@ -9,7 +9,7 @@ import { remove } from '../redux/slicer/userDataSlice'
 
 const Container = styled.div`
   display: flex;
-  height: 5rem;
+  min-height: 5rem;
   align-items: center;
   background-color: var(--app-main-color);
   min-width: var(--app-min-width);

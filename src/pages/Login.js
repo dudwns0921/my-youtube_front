@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { login } from '../redux/slicer/isLoginSlice'
 import { insert } from '../redux/slicer/userDataSlice'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { loginUser } from '../axios/axios'
 import {
@@ -11,14 +11,61 @@ import {
   saveUserToCookie,
 } from '../utils/cookie'
 
+const Container = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  padding: 3rem;
   width: 30%;
+  height: 50%;
+  min-width: 35rem;
+  min-height: 25rem;
+  background-color: white;
+  input {
+    padding: 1rem;
+    border: none;
+    background-color: #f2f2f2;
+    height: 4rem;
+    &:focus {
+      outline: none;
+    }
+  }
+  span {
+    display: flex;
+    justify-content: center;
+    a {
+      text-decoration: none;
+      color: var(--app-main-color);
+      margin-left: 1rem;
+    }
+  }
+`
+
+const BtnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   button {
+    color: white;
+    border: none;
+    cursor: pointer;
+    height: 4rem;
     a {
       text-decoration: none;
       color: black;
+    }
+    &:nth-child(1) {
+      background-color: var(--app-main-color);
+      margin-bottom: 0.5rem;
+    }
+    &:nth-child(2) {
+      background-color: black;
     }
   }
 `
@@ -56,28 +103,33 @@ function Login() {
     }
   }
   return (
-    <StyledForm onSubmit={handleSubmit}>
-      <label htmlFor="email">아이디</label>
-      <input
-        id="email"
-        type="text"
-        onChange={(e) => {
-          setId(e.target.value)
-        }}
-      />
-      <label htmlFor="password">비밀번호</label>
-      <input
-        id="password"
-        type="password"
-        onChange={(e) => {
-          setPassword(e.target.value)
-        }}
-      />
-      <button type="submit">로그인</button>
-      <button type="button" onClick={handleGithubLogin}>
-        Continue with github
-      </button>
-    </StyledForm>
+    <Container>
+      <StyledForm onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="email"
+          onChange={(e) => {
+            setId(e.target.value)
+          }}
+        />
+        <input
+          type="password"
+          placeholder="password"
+          onChange={(e) => {
+            setPassword(e.target.value)
+          }}
+        />
+        <BtnContainer>
+          <button type="submit">Login</button>
+          <button type="button" onClick={handleGithubLogin}>
+            Continue with github
+          </button>
+        </BtnContainer>
+        <span>
+          Not registered? <Link to="/join">Create an account</Link>
+        </span>
+      </StyledForm>
+    </Container>
   )
 }
 

@@ -23,7 +23,7 @@ import { Provider } from 'react-redux'
 import store from './redux/store'
 
 const GlobalStyles = createGlobalStyle`
-  *{
+  * {
     box-sizing: border-box;
   }
   :root {
