@@ -31,6 +31,7 @@ const GlobalStyles = createGlobalStyle`
     --app-main-color: #F53083;
     --component-thumbnail-width: 20rem;
     --component-thumbnail-height: 30rem;
+    --element-button-min-width: 6rem;
   }
   ${reset}
 `

@@ -12,7 +12,6 @@ const Container = styled.div`
   min-height: 5rem;
   align-items: center;
   background-color: var(--app-main-color);
-  min-width: var(--app-min-width);
   padding: 0.5rem;
   font-size: 2rem;
 `
