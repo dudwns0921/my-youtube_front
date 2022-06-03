@@ -10,7 +10,35 @@ import { useSelector } from 'react-redux'
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-  width: 30%;
+  min-width: 35rem;
+  background-color: white;
+  padding: 3rem;
+  label {
+    margin-bottom: 0.5rem;
+  }
+  input {
+    padding: 1rem;
+    border: none;
+    background-color: #f2f2f2;
+    height: 4rem;
+    margin-bottom: 1rem;
+    &:focus {
+      outline: none;
+    }
+  }
+  button {
+    color: white;
+    border: none;
+    cursor: pointer;
+    height: 4rem;
+    background-color: var(--app-main-color);
+    &:disabled {
+      opacity: 0.2;
+    }
+  }
+  p {
+    margin-bottom: 1rem;
+  }
 `
 function UserPwdEdit() {
   const navigate = useNavigate()
@@ -46,19 +74,21 @@ function UserPwdEdit() {
   return (
     <div>
       <StyledForm onSubmit={handleEditUserPwd}>
-        <label htmlFor="newPassword">새 비밀번호</label>
+        <label htmlFor="newPassword">New Password</label>
         <input
           id="newPassword"
           type="password"
+          placeholder="New Password"
           required
           onChange={(e) => {
             setNewPassword(e.target.value)
           }}
         />
-        <label htmlFor="confirmPassword">새 비밀번호 확인</label>
+        <label htmlFor="confirmPassword">Confirm New Password</label>
         <input
           id="confirmPassword"
           type="password"
+          placeholder="Confirm New Password"
           required
           onChange={(e) => {
             setConfirmNewPassword(e.target.value)
@@ -70,7 +100,7 @@ function UserPwdEdit() {
           <p style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</p>
         )}
         <button disabled={isPasswordConfirmed ? false : true} type="submit">
-          비밀번호 수정
+          Save
         </button>
       </StyledForm>
     </div>

@@ -9,6 +9,7 @@ import { remove } from '../redux/slicer/userDataSlice'
 
 const Container = styled.div`
   display: flex;
+  min-width: max-content;
   min-height: 5rem;
   align-items: center;
   background-color: var(--app-main-color);
@@ -21,6 +22,7 @@ const Nav = styled.nav`
   span {
     margin-right: 1rem;
     cursor: pointer;
+    color: white;
   }
 `
 

@@ -56,7 +56,6 @@ const UserInfo = styled.div`
       background-color: var(--app-main-color);
       cursor: pointer;
       color: white;
-      font-size: 1.5rem;
       padding: 1rem;
     }
   }
@@ -131,11 +130,11 @@ function MyPage() {
             <UserEtc></UserEtc>
           </section>
           <section>
-            {myVideos.length > 0
+            {/* {myVideos.length > 0
               ? myVideos.map((video) => {
                   return <Thumbnail key={video.createdAt} videoObj={video} />
                 })
-              : 'No videos'}
+              : 'No videos'} */}
           </section>
         </Container>
       )}

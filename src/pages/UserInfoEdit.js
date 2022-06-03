@@ -6,9 +6,41 @@ import { useDispatch, useSelector } from 'react-redux'
 import { insert } from '../redux/slicer/userDataSlice'
 
 const StyledForm = styled.form`
+  img {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+  }
   display: flex;
   flex-direction: column;
-  width: 30%;
+  min-width: 35rem;
+  background-color: white;
+  padding: 3rem;
+  label {
+    margin-bottom: 0.5rem;
+  }
+  input {
+    margin-bottom: 1rem;
+  }
+  input[type='text'] {
+    padding: 1rem;
+    border: none;
+    background-color: #f2f2f2;
+    height: 4rem;
+    &:focus {
+      outline: none;
+    }
+  }
+  button {
+    color: white;
+    border: none;
+    cursor: pointer;
+    height: 4rem;
+    background-color: var(--app-main-color);
+    &:disabled {
+      opacity: 0.2;
+    }
+  }
 `
 
 function UserInfoEdit() {
@@ -53,6 +85,9 @@ function UserInfoEdit() {
         'Loading...'
       ) : (
         <StyledForm onSubmit={handleEditUser}>
+          <img
+            src={`${process.env.REACT_APP_SERVER_BASE_URL}${oldUserData.avatarURL}`}
+          />
           <label htmlFor="avatar">Avatar</label>
           <input
             id="avatar"
@@ -62,25 +97,25 @@ function UserInfoEdit() {
               setAvatarFile(e.target.files[0])
             }}
           />
-          <label htmlFor="newEmail">이메일</label>
+          <label htmlFor="email">Email</label>
           <input
-            id="newEmail"
+            id="email"
             type="text"
             value={newEmail}
             onChange={(e) => {
               setNewEmail(e.target.value)
             }}
           />
-          <label htmlFor="newUsername">닉네임</label>
+          <label htmlFor="username">Username</label>
           <input
-            id="newUsername"
+            id="username"
             type="text"
             value={newUsername}
             onChange={(e) => {
               setNewUsername(e.target.value)
             }}
           />
-          <button type="submit">수정</button>
+          <button type="submit">Save</button>
         </StyledForm>
       )}
     </div>
