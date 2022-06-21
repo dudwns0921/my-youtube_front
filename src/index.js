@@ -27,9 +27,9 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
   :root {
-    --app-min-width: 40.5rem;
+    --component-thumbnail-min-width: 20rem;
+    --component-thumbnail-min-height: 25rem;
     --app-main-color: #F53083;
-    --component-thumbnail-height: 40rem;
     --element-button-min-width: 6rem;
   }
   ${reset}
