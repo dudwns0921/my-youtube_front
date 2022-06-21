@@ -8,13 +8,16 @@ import { logout } from '../redux/slicer/isLoginSlice'
 import { remove } from '../redux/slicer/userDataSlice'
 
 const Container = styled.div`
+  position: fixed;
   display: flex;
+  width: 100%;
   min-width: max-content;
   min-height: 5rem;
   align-items: center;
   background-color: var(--app-main-color);
   padding: 0.5rem;
   font-size: 2rem;
+  z-index: 9999;
 `
 
 const Nav = styled.nav`

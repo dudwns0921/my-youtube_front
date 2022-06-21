@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Container = styled.div`
-  height: var(--component-thumbnail-height);
-  max-width: var(--component-thumbnail-width);
-  min-width: var(--component-thumbnail-width);
+  height: 80vh;
+  width: 30rem;
   background-color: black;
   border-radius: 1rem;
 `

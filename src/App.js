@@ -10,7 +10,8 @@ const Container = styled.div`
 `
 
 const Content = styled.div`
-  padding: 0.5rem;
+  padding: 5.5rem 0.5rem 0 0.5rem;
+  // for navBar fixed
   display: flex;
   background-color: #011627;
 `

@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { getVideos } from '../axios/axios'
 import _ from 'lodash'
-import Thumbnail from '../components/Thumbnail'
 import styled from 'styled-components'
+import ThumbnailContainer from '../components/ThumbnailContainer'
 
 const Container = styled.div`
-  display: grid;
-  width: 90%;
-  min-width: var(--app-min-width);
-  grid-gap: 0.5rem;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(var(--component-thumbnail-width), auto)
-  );
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
 `
 
 function Home() {
@@ -35,7 +31,7 @@ function Home() {
         ? 'Loading...'
         : videos.length > 0
         ? videos.map((video) => {
-            return <Thumbnail key={video.createdAt} videoObj={video} />
+            return <ThumbnailContainer key={video.createdAt} videoObj={video} />
           })
         : 'No Videos'}
     </Container>

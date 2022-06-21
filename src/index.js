@@ -29,8 +29,7 @@ const GlobalStyles = createGlobalStyle`
   :root {
     --app-min-width: 40.5rem;
     --app-main-color: #F53083;
-    --component-thumbnail-width: 20rem;
-    --component-thumbnail-height: 30rem;
+    --component-thumbnail-height: 40rem;
     --element-button-min-width: 6rem;
   }
   ${reset}
