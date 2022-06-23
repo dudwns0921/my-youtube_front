@@ -2,7 +2,6 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { deleteCookie } from '../utils/cookie'
-import SearchBar from './SearchBar'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../redux/slicer/isLoginSlice'
 import { remove } from '../redux/slicer/userDataSlice'
@@ -63,7 +62,6 @@ function NavBar() {
             <StyledLink to="/join">Join</StyledLink>
           </>
         )}
-        <SearchBar />
       </Nav>
     </Container>
   )

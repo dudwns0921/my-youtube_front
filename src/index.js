@@ -13,7 +13,6 @@ import Upload from './pages/Upload'
 import Video from './pages/Video'
 import VideoEdit from './pages/VideoEdit'
 import NotFound from './pages/NotFound'
-import Search from './pages/Search'
 import GIthubLoginProcess from './pages/GIthubLoginProcess'
 import MyPage from './pages/MyPage'
 import UserEdit from './pages/UserEdit'
@@ -48,7 +47,6 @@ root.render(
           <Route path="upload" element={<Upload />} />
           <Route path="video/:id" element={<Video />} />
           <Route path="videoEdit/:id" element={<VideoEdit />} />
-          <Route path="search/:keyword" element={<Search />} />
           <Route path="mypage" element={<MyPage />} />
           <Route path="userEdit" element={<UserEdit />}>
             <Route index element={<UserInfoEdit />} />

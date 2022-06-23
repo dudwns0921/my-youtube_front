@@ -4,6 +4,14 @@ import { useNavigate } from 'react-router-dom'
 import { uploadVideo } from '../axios/axios'
 import { useSelector } from 'react-redux'
 
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`
+
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -61,7 +69,7 @@ function Upload() {
     }
   }
   return (
-    <div>
+    <Container>
       <StyledForm onSubmit={handleUploadVideo}>
         <label htmlFor="videoFile">비디오</label>
         <input
@@ -103,7 +111,7 @@ function Upload() {
         />
         <button type="submit">업로드</button>
       </StyledForm>
-    </div>
+    </Container>
   )
 }
 

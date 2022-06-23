@@ -5,15 +5,15 @@ import NavBar from './components/NavBar'
 
 const Container = styled.div`
   display: grid;
-  height: 100vh;
-  grid-template-rows: 1fr 9fr;
+  min-height: 100vh;
+  background-color: #011627;
 `
 
 const Content = styled.div`
   padding: 5rem 0.5rem 0 0.5rem;
   // for navBar fixed
   display: flex;
-  background-color: #011627;
+  grid-template-rows: 1fr 9fr;
 `
 
 function App() {
