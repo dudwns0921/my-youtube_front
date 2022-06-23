@@ -1,7 +1,6 @@
 import React from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { useLocation } from 'react-router-dom'
 
 const Container = styled.div`
   background-color: white;

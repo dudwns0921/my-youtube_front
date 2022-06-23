@@ -50,6 +50,7 @@ function UserInfoEdit() {
   const [newEmail, setNewEmail] = useState('')
   const [newUsername, setNewUsername] = useState('')
   const [avatarFile, setAvatarFile] = useState('')
+  const [imgPreview, setImgPreview] = useState('')
   const [loading, setLoading] = useState(true)
 
   const setData = () => {
@@ -76,6 +77,20 @@ function UserInfoEdit() {
     }
   }
 
+  const encodeFileToBase64 = (fileBlob) => {
+    const reader = new FileReader()
+
+    reader.readAsDataURL(fileBlob)
+
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setImgPreview(reader.result)
+
+        resolve()
+      }
+    })
+  }
+
   useEffect(() => {
     setData()
   }, [])
@@ -86,7 +101,11 @@ function UserInfoEdit() {
       ) : (
         <StyledForm onSubmit={handleEditUser}>
           <img
-            src={`${process.env.REACT_APP_SERVER_BASE_URL}${oldUserData.avatarURL}`}
+            src={
+              imgPreview
+                ? imgPreview
+                : `${process.env.REACT_APP_SERVER_BASE_URL}${oldUserData.avatarURL}`
+            }
           />
           <label htmlFor="avatar">Avatar</label>
           <input
@@ -95,6 +114,7 @@ function UserInfoEdit() {
             accept="image/*"
             onChange={(e) => {
               setAvatarFile(e.target.files[0])
+              encodeFileToBase64(e.target.files[0])
             }}
           />
           <label htmlFor="email">Email</label>
